@@ -1,20 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-        if (usuarioLogado) {
-        console.log('Usuário logado:', usuarioLogado.nome);
-        } else {
-        // Se não estiver logado, redireciona de volta
-        window.location.href = 'login.html';
-}
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PedeJá - Home</title>
+  <link rel="stylesheet" href="css/home.css" />
+  <!-- Fonte Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  
 </head>
 <body>
+  <div class="container">
     
+    <!-- Topo com localização -->
+   
+
+    <!-- Bloco destaque -->
+    <section class="hero">
+      <div class="hero-text">
+        <h2>Com Fome?</h2>
+        <p>A Gente Resolve<br>Pra Você!</p>
+      </div>
+      <div class="hero-image">
+        <img src="assets/burger.png" alt="Hamburger">
+      </div>
+    </section>
+
+     <header class="location-header">
+      <div class="user-info">
+        <div class="user-name">Olá, <span id="nomeUsuario">Usuário</span> 👋</div>
+        <a href="#" id="logoutLink" class="logout-link">Sair</a>
+        </div>
+      </div>
+    </header>
+    <!-- Campo de busca -->
+    <div class="search-bar">
+      <input type="text" placeholder="O que você deseja comer?" />
+    </div>
+
+    <!-- Navegação de categorias -->
+    <section class="categories">
+      <div class="category-item">🍔<p>Near Me</p></div>
+      <div class="category-item">🎉<p>Big Promo</p></div>
+      <div class="category-item">⭐<p>Best Seller</p></div>
+      <div class="category-item">💰<p>Budget Meal</p></div>
+      <div class="category-item">🥗<p>Healthy Food</p></div>
+      <div class="category-item">🕓<p>Open 24 Hours</p></div>
+      <div class="category-item">🏬<p>Popular</p></div>
+      <div class="category-item">🔲<p>More</p></div>
+    </section>
+
+    <!-- Cuisines -->
+    <section class="cuisines">
+      <div class="section-header">
+        <h3>Cuisines</h3>
+        <a href="#">View All</a>
+      </div>
+      <div class="cuisine-list">
+        <span>🍗 Chicken</span>
+        <span>🍔 Burger</span>
+        <span>🍕 Pizza</span>
+        <span>🧁 Bakery</span>
+        <span>🥗 Salad</span>
+      </div>
+    </section>
+
+    <!-- Special For You -->
+    <section class="special">
+      <div class="section-header">
+        <h3>Special For You</h3>
+        <a href="#">View All</a>
+      </div>
+      <p>Conteúdo promocional ou restaurantes em destaque aqui.</p>
+    </section>
+
+  </div>
+
+  <!-- Navegação inferior -->
+  <nav class="bottom-nav">
+    <a class="active">📍<br>Explore</a>
+    <a>🛒<br>Chart</a>
+    <a>🕓<br>History</a>
+    <a>👤<br>Profile</a>
+  </nav>
+
+ <script>
+  // Simulação: pega nome do usuário armazenado
+  const nome = localStorage.getItem("usuarioNome") || "Visitante";
+  document.getElementById("nomeUsuario").textContent = nome;
+
+  // Função de logout
+  document.getElementById("logoutLink").addEventListener("click", function (e) {
+    e.preventDefault();
+    localStorage.removeItem("usuarioLogado");
+    localStorage.removeItem("usuarioNome");
+    window.location.href = "login.html";
+  });
+</script>
+
 </body>
 </html>
