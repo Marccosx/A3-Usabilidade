@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+        if (usuarioLogado) {
+        console.log('Usuário logado:', usuarioLogado.nome);
+        } else {
+        // Se não estiver logado, redireciona de volta
+        window.location.href = 'login.html';
+}
+    </script>
 </head>
 <body>
     
