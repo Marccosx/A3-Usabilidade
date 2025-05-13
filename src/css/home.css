@@ -1,3 +1,4 @@
+/* Reset e configurações gerais */
 * {
   margin: 0;
   padding: 0;
@@ -177,9 +178,7 @@ body {
   color: #a00000;
 }
 
-
-
-/* Responsivo: tablets e telas médias 
+/* Responsivo: tablets e telas médias */
 @media (min-width: 768px) {
   .container {
     max-width: 700px;
@@ -224,7 +223,7 @@ body {
   }
 }
 
-/* Responsivo: telas grandes/desktops 
+/* Responsivo: telas grandes/desktops */
 @media (min-width: 1024px) {
   .container {
     max-width: 900px;
@@ -272,4 +271,4 @@ body {
   .bottom-nav a {
     font-size: 18px;
   }
-}*/
+}

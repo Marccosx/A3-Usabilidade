@@ -1,6 +1,9 @@
-// Simula pegar nome do usuário (pode ser expandido)
-const nome = localStorage.getItem("usuarioNome") || "Visitante";
-console.log("Usuário logado como:", nome);
+// Recupera o usuário logado do localStorage
+const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+const nome = usuarioLogado?.nome || "Visitante";
+
+// Exibe o nome do usuário na página
+document.getElementById("nomeUsuario").textContent = nome;
 
 // Em caso de logout
 document.querySelectorAll('.logout-link')?.forEach(link => {
