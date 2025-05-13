@@ -7,7 +7,7 @@ const formCdastro = document.getElementById('formCadastro')
 if(formCdastro){
 formCdastro.addEventListener('submit', function(e){
     e.preventDefault();
-
+  console.log('entrei aqui');
     const nome = document.getElementById('nome').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
@@ -35,12 +35,14 @@ formCdastro.addEventListener('submit', function(e){
      localStorage.setItem('usuarios', JSON.stringify(usuarios));
      localStorage.setItem('lastId', lastId.toString());
      alert(`Usuário cadastrado, Bem vindo! ${novoUsuario.nome}`);
+     window.location.href= 'login.html';
     this.reset();
   }
 
   
 });
 }
+
 
 
 const formLogin = document.getElementById('formLogin');
@@ -65,3 +67,5 @@ function validarCampoSemNumeros(campo) {
      const regex = /^[a-zA-Z\s]+$/; // Regex para verificar se o campo contém apenas letras e espaços
      return regex.test(campo); // Retorna true se a string corresponder à expressão regular
    };
+
+  

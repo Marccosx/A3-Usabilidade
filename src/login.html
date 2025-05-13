@@ -9,8 +9,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      const splash = document.getElementById('splash-screen');
+      splash.style.display = 'none';
+    }, 3500); // tempo total com animação + atraso
+  });
+  </script>
 </head>
 <body>
+  <div id="splash-screen">
+    <div class="splash-content">
+      <h1>PedeJá</h1>
+      <p>Food!</p>
+    </div>
+  </div>
+  
   <div class="container">
     <header>
       <h1>Bem vindo</h1>
@@ -43,13 +58,12 @@
       <button type="submit" id="submit">Login</button>
     </form>
 
-    <footer class="brand">
-        <div class="divider"></div>
-        <p class="credit">por</p>
-      <p>PedeJá <span>Food!</span></p>
+    <footer>
+      <div class="divider"></div>
+      <p class="credit">por</p>
+      <h2 class="brand">PedeJá <span>Food!</span></h2>
     </footer>
-  </div>
-
+    
   <script src="scripts/script.js"></script>
 </body>
 </html>

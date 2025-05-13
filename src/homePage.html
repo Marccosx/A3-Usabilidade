@@ -86,19 +86,7 @@
     <a>👤<br>Profile</a>
   </nav>
 
- <script>
-  // Simulação: pega nome do usuário armazenado
-  const nome = localStorage.getItem("usuarioNome") || "Visitante";
-  document.getElementById("nomeUsuario").textContent = nome;
-
-  // Função de logout
-  document.getElementById("logoutLink").addEventListener("click", function (e) {
-    e.preventDefault();
-    localStorage.removeItem("usuarioLogado");
-    localStorage.removeItem("usuarioNome");
-    window.location.href = "login.html";
-  });
-</script>
+ <script src="scripts/home.js"></script>
 
 </body>
 </html>
