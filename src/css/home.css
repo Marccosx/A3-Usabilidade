@@ -23,7 +23,10 @@ body {
 .titulo {
   color: #FFDE84;
 }
-
+a{
+  color: white;
+  outline: none;
+}
 .texto-destaque h2 {
   font-size: 24px;
   font-weight: 700;

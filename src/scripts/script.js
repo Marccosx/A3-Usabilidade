@@ -35,7 +35,7 @@ formCdastro.addEventListener('submit', function(e){
      localStorage.setItem('usuarios', JSON.stringify(usuarios));
      localStorage.setItem('lastId', lastId.toString());
      alert(`Usuário cadastrado, Bem vindo! ${novoUsuario.nome}`);
-     window.location.href= 'login.html';
+     window.location.href= 'homePage.html';
     this.reset();
   }
 
