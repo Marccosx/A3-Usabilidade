@@ -1,4 +1,4 @@
-const db = require('../db');
+const db = require('../connection');
 
 function criarTabelasPedido(){
 
@@ -60,3 +60,5 @@ function criarTabelasPedido(){
     })
 
 }
+
+module.exports = criarTabelasPedido;

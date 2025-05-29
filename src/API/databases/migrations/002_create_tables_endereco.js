@@ -1,4 +1,4 @@
-const db = require('../db');
+const db = require('../connection');
 
 function createTablesEndereco() {
 
@@ -38,3 +38,5 @@ function createTablesEndereco() {
             `);
     })
 }
+
+module.exports = createTablesEndereco;

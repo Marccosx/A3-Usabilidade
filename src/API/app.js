@@ -1,0 +1,27 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const { PORTA } = require('./config');
+
+const app = express();
+// Execute as migrations ao iniciar o servidor
+const createUsuario = require('./databases/migrations/001_create_tables_usuario');
+const createEndereco = require('./databases/migrations/002_create_tables_endereco');
+const createRestaurante = require('./databases/migrations/003_create_tables_restaurante');
+const createProduto = require('./databases/migrations/004_create_tables_produto');
+const createPedido = require('./databases/migrations/005_create_tables_pedido');
+
+createUsuario();
+createEndereco();
+createRestaurante();
+createProduto();
+createPedido();
+
+app.use(bodyParser.json());
+
+// Rotas de usuário
+const usuarioRoutes = require('./routes/usuarioRoutes');
+app.use('/usuarios', usuarioRoutes);
+
+app.listen(PORTA, () => {
+  console.log(`Servidor rodando em http://localhost:${PORTA}`);
+});

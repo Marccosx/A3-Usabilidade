@@ -1,4 +1,4 @@
-const db = require('../db');
+const db = require('../connection');
 
 function criarTablesRestaurante(){
     db.serialize(()=>{
@@ -45,3 +45,4 @@ function criarTablesRestaurante(){
             `);
     })
 }
+module.exports = criarTablesRestaurante;

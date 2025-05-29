@@ -3,4 +3,4 @@ node_modules/
 dist/
 *.log
 npm-debug.log*
-.DS_Store
+.DS_Storerem
