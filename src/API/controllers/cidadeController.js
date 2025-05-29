@@ -9,9 +9,12 @@ const cidadeController = {
             return res.status(400).json({erro: "Todos os campos são obrigatórios"})
         }
 
-        cidadeModel.buscarCidadePorId(id, async(err, cidadeExistente)=>{
-            if (cidadeExistente) {
-        return res.status(400).json({ erro: 'cidade já cadastrada.' });
+        cidadeModel.buscarCidadePorNomeEstado(nome, id_estado, (err, cidadeExistente)=>{
+            if (err) {
+            return res.status(500).json({ erro: 'Erro ao buscar cidade.', detalhe: err.message });
+        }
+        if (cidadeExistente) {
+            return res.status(400).json({ erro: 'Cidade já cadastrada.' });
         }
         })
         cidadeModel.create({nome,id_estado}, (err)=>{

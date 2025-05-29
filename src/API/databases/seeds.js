@@ -3,10 +3,10 @@ const db = require('./connection');
 db.serialize(() => {
 
   // Insert do grupo
-  db.run(`INSERT INTO grupo (id, nome) VALUES (1, 'super admin')`);
-  db.run(`INSERT INTO grupo (id, nome) VALUES (2, 'dono de restaurante')`);
-  db.run(`INSERT INTO grupo (id, nome) VALUES (3, 'cliente')`);
-  console.log('Grupos inseridos com sucesso!');
+  // db.run(`INSERT INTO grupo (id, nome) VALUES (1, 'super admin')`);
+  // db.run(`INSERT INTO grupo (id, nome) VALUES (2, 'dono de restaurante')`);
+  // db.run(`INSERT INTO grupo (id, nome) VALUES (3, 'cliente')`);
+  // console.log('Grupos inseridos com sucesso!');
 
    const estados = [
     { id: 1, nome: 'Acre', sigla: 'AC' },

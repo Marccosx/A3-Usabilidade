@@ -20,7 +20,12 @@ app.use(bodyParser.json());
 
 // Rotas de usuário
 const usuarioRoutes = require('./routes/usuarioRoutes');
+const cidadeRoutes = require('./routes/cidadeRoutes');
+const enderecoRoutes = require('./routes/enderecoRoutes');
+
+app.use('/enderecos', enderecoRoutes);
 app.use('/usuarios', usuarioRoutes);
+app.use('/cidades', cidadeRoutes);
 
 app.listen(PORTA, () => {
   console.log(`Servidor rodando em http://localhost:${PORTA}`);
