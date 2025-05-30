@@ -13,10 +13,16 @@ const cidadeModel = {
         );
     },
     list: (callback) => {
-        db.all(`SELECT * FROM cidade`, [], (err, rows) => {
-            if (err) return callback(err);
-            callback(null, rows);
-        });
+        db.all(
+            `SELECT cidade.id, cidade.nome, estado.sigla 
+             FROM cidade 
+             JOIN estado ON cidade.id_estado = estado.id`,
+            [],
+            (err, rows) => {
+                if (err) return callback(err);
+                callback(null, rows);
+            }
+        );
     },
     buscarCidadePorId: (id, callback) => {
         db.get(`SELECT * FROM cidade where id = ?`, [id], (err, row) => {

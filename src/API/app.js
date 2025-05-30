@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { PORTA } = require('./config');
+const cors = require('cors');
 
 const app = express();
 // Execute as migrations ao iniciar o servidor
@@ -17,6 +18,7 @@ createProduto();
 createPedido();
 
 app.use(bodyParser.json());
+app.use(cors());
 
 // Rotas de usuário
 const usuarioRoutes = require('./routes/usuarioRoutes');
