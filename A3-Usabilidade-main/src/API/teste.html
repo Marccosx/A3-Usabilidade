@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Teste</h1>
+
+    <div id="teste"></div>
+    <script>
+        fetch(`http://localhost:3000/cidades/`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na requisição');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Cria a tabela
+                let tabela = `<table border="1">
+                    <tr>
+                        <th>Cidade</th>
+                        <th>Sigla</th>
+                    </tr>`;
+                data.forEach(cidade => {
+                    tabela += `<tr>
+                        <td>${cidade.nome}</td>
+                        <td>${cidade.sigla || ''}</td>
+                    </tr>`;
+                });
+                tabela += `</table>`;
+                document.getElementById('teste').innerHTML = tabela;
+                console.log(data);
+            })
+            .catch(error => {
+                document.getElementById('teste').innerText = error.message;
+            });
+    </script>
+</body>
+</html>

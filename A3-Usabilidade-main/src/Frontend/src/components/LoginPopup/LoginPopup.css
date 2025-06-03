@@ -1,0 +1,142 @@
+.login-popup {
+  position: fixed;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  padding: 20px;
+}
+
+.login-popup-close {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  z-index: 1100;
+  filter: invert(30%);
+}
+
+.login-popup-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 14px;
+}
+
+.login-popup-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.login-popup-header h1 {
+  font-size: 38px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.login-popup-header p {
+  font-size: 28px;
+  color: #161616;
+}
+
+.login-popup-header span {
+  font-size: 14px;
+  color: #555;
+}
+
+.login-popup-header a {
+  color: #d32f2f;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+.login-popup-header a:hover {
+  text-decoration: underline;
+}
+
+.login-popup-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-popup-inputs input {
+  padding: 10px 4px;
+  font-weight: medium;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  background: transparent;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.login-popup-inputs input:focus {
+  border-bottom: 2px solid #d32f2f;
+}
+
+.login-popup-forgot {
+  font-size: 14px;
+  color: #333;
+  text-align: right;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.login-popup-container button {
+  background-color: #d32f2f;
+  color: #fff;
+  font-size: 18px;
+  padding: 14px;
+  border-radius: 32px;
+  border: none;
+  cursor: pointer;
+  font-weight: medium;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.login-popup-container button:hover {
+  background-color: #b71c1c;
+  color: #fff;
+}
+
+.login-popup-condition {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: #555;
+  margin-top: -10px;
+}
+
+.login-popup-footer {
+  text-align: center;
+  margin-top: 30px;
+  color: #888;
+}
+
+.login-popup-header p {
+  color: #555;
+  font-weight: 300; /* lighter */
+  margin-top: -10px ; /* aproxima do h1 */
+}
+
+
+.login-popup-logo2 {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
