@@ -11,12 +11,6 @@ function criarTabelasPedido(){
             );
             `);
 
-        db.run(`
-            INSERT OR IGNORE INTO status_pedido(nome) VALUES
-            ('Cartão de Credito'),
-            ('Cartão de Debito'),
-            ('PIX')
-            `);
 
         db.run(`
             CREATE TABLE IF NOT EXISTS pedido(

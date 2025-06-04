@@ -17,6 +17,8 @@ createRestaurante();
 createProduto();
 createPedido();
 
+//require('./databases/seeds');
+
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -24,10 +26,12 @@ app.use(cors());
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const cidadeRoutes = require('./routes/cidadeRoutes');
 const enderecoRoutes = require('./routes/enderecoRoutes');
+const restauranteRoutes = require('./routes/restauranteRoutes');
 
 app.use('/enderecos', enderecoRoutes);
 app.use('/usuarios', usuarioRoutes);
 app.use('/cidades', cidadeRoutes);
+app.use('/restaurantes', restauranteRoutes);
 
 app.listen(PORTA, () => {
   console.log(`Servidor rodando em http://localhost:${PORTA}`);

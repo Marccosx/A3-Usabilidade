@@ -24,8 +24,7 @@ function createTablesUsuario() {
         db.run(`
             CREATE TABLE IF NOT EXISTS permissao(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nome TEXT,
-                descricao TEXT
+                nome TEXT
             );
         `);
 

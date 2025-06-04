@@ -10,20 +10,11 @@ function criarTabelasProduto() {
                 preco REAL,
                 ativo BOOLEAN,
                 id_restaurante INTEGER,
+                foto_produto TEXT,
                 FOREIGN KEY (id_restaurante) REFERENCES restaurante(id)
             );
         `);
 
-        db.run(`
-            CREATE TABLE IF NOT EXISTS foto_produto(
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nome TEXT,
-                contentType TEXT,
-                tamanho REAL,
-                id_produto INTEGER,
-                FOREIGN KEY (id_produto) REFERENCES produto(id)
-            );
-        `);
     });
 }
 
