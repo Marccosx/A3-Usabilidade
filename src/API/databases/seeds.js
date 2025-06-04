@@ -256,6 +256,13 @@ grupos_permissoes.forEach(grupo_permissao => {
   status_pedido.forEach(status => {
     db.run(`INSERT INTO status_pedido (id, nome) VALUES (?, ?)`, [status.id, status.nome]);
   });
+
+  db.run(`INSERT INTO usuario (id, nome, email, senha, id_grupo) VALUES (1, 'Admin', 'admin@email.com', 'admin123', 1)`, (err) => {
+    if (err) {
+      console.error('Erro ao inserir usuário admin:', err.message);
+    }
+  });
+  
 console.log('Dados inseridos ao banco com sucesso!');
 });
 db.close();
