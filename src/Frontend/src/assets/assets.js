@@ -86,267 +86,294 @@ export const assets = {
 
 export const menu_list = [
     {
-        menu_name: "Salad",
+        menu_name: "Saladas",
         menu_image: menu_1
     },
     {
-        menu_name: "Rolls",
+        menu_name: "Rolinhos",
         menu_image: menu_2
     },
     {
-        menu_name: "Deserts",
+        menu_name: "Sobremesas",
         menu_image: menu_3
     },
     {
-        menu_name: "Sandwich",
+        menu_name: "Sanduíches",
         menu_image: menu_4
     },
     {
-        menu_name: "Cake",
+        menu_name: "Bolos",
         menu_image: menu_5
     },
     {
-        menu_name: "Pure Veg",
+        menu_name: "Vegetariano",
         menu_image: menu_6
     },
     {
-        menu_name: "Pasta",
+        menu_name: "Massas",
         menu_image: menu_7
     },
     {
-        menu_name: "Noodles",
+        menu_name: "Macarrão",
         menu_image: menu_8
-    }]
+    }
+]
 
 export const food_list = [
     {
         _id: "1",
-        name: "Greek salad",
+        name: "Salada Grega",
         image: food_1,
         price: 12,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Salad"
+        description: "Salada fresca com pepino, tomate, azeitonas e queijo feta",
+        category: "Saladas"
     },
     {
         _id: "2",
-        name: "Veg salad",
+        name: "Salada Vegetariana",
         image: food_2,
         price: 18,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Salad"
-    }, {
+        description: "Mix de folhas com legumes grelhados e molho especial",
+        category: "Saladas"
+    },
+    {
         _id: "3",
-        name: "Clover Salad",
+        name: "Salada Primavera",
         image: food_3,
         price: 16,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Salad"
-    }, {
+        description: "Salada colorida com frutas da estação e molho cítrico",
+        category: "Saladas"
+    },
+    {
         _id: "4",
-        name: "Chicken Salad",
+        name: "Salada de Frango",
         image: food_4,
         price: 24,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Salad"
-    }, {
+        description: "Salada com tiras de frango grelhado e molho caesar",
+        category: "Saladas"
+    },
+    {
         _id: "5",
-        name: "Lasagna Rolls",
+        name: "Rolinhos de Lasanha",
         image: food_5,
         price: 14,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
-    }, {
+        description: "Rolinhos de massa recheados com queijo e molho de tomate",
+        category: "Rolinhos"
+    },
+    {
         _id: "6",
-        name: "Peri Peri Rolls",
+        name: "Rolinhos Peri Peri",
         image: food_6,
         price: 12,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
-    }, {
+        description: "Rolinhos apimentados com molho peri peri",
+        category: "Rolinhos"
+    },
+    {
         _id: "7",
-        name: "Chicken Rolls",
+        name: "Rolinhos de Frango",
         image: food_7,
         price: 20,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
-    }, {
+        description: "Rolinhos crocantes recheados com frango temperado",
+        category: "Rolinhos"
+    },
+    {
         _id: "8",
-        name: "Veg Rolls",
+        name: "Rolinhos Vegetarianos",
         image: food_8,
         price: 15,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Rolls"
-    }, {
+        description: "Rolinhos recheados com legumes frescos",
+        category: "Rolinhos"
+    },
+    {
         _id: "9",
-        name: "Ripple Ice Cream",
+        name: "Sorvete Mesclado",
         image: food_9,
         price: 14,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Deserts"
-    }, {
+        description: "Sorvete cremoso com calda especial mesclada",
+        category: "Sobremesas"
+    },
+    {
         _id: "10",
-        name: "Fruit Ice Cream",
+        name: "Sorvete de Frutas",
         image: food_10,
         price: 22,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Deserts"
-    }, {
+        description: "Sorvete artesanal com pedaços de frutas naturais",
+        category: "Sobremesas"
+    },
+    {
         _id: "11",
-        name: "Jar Ice Cream",
+        name: "Sorvete no Pote",
         image: food_11,
         price: 10,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Deserts"
-    }, {
+        description: "Sorvete cremoso servido em pote decorado",
+        category: "Sobremesas"
+    },
+    {
         _id: "12",
-        name: "Vanilla Ice Cream",
+        name: "Sorvete de Baunilha",
         image: food_12,
         price: 12,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Deserts"
+        description: "Sorvete tradicional de baunilha com calda quente",
+        category: "Sobremesas"
     },
     {
         _id: "13",
-        name: "Chicken Sandwich",
+        name: "Sanduíche de Frango",
         image: food_13,
         price: 12,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Sandwich"
+        description: "Sanduíche com frango grelhado e molho especial",
+        category: "Sanduíches"
     },
     {
         _id: "14",
-        name: "Vegan Sandwich",
+        name: "Sanduíche Vegano",
         image: food_14,
         price: 18,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Sandwich"
-    }, {
+        description: "Sanduíche com hambúrguer de grão-de-bico e legumes",
+        category: "Sanduíches"
+    },
+    {
         _id: "15",
-        name: "Grilled Sandwich",
+        name: "Sanduíche Grelhado",
         image: food_15,
         price: 16,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Sandwich"
-    }, {
+        description: "Sanduíche quente com queijo derretido",
+        category: "Sanduíches"
+    },
+    {
         _id: "16",
-        name: "Bread Sandwich",
+        name: "Sanduíche Natural",
         image: food_16,
         price: 24,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Sandwich"
-    }, {
+        description: "Sanduíche leve com pasta de atum e salada",
+        category: "Sanduíches"
+    },
+    {
         _id: "17",
-        name: "Cup Cake",
+        name: "Cupcake",
         image: food_17,
         price: 14,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Cake"
-    }, {
+        description: "Cupcake decorado com cobertura cremosa",
+        category: "Bolos"
+    },
+    {
         _id: "18",
-        name: "Vegan Cake",
+        name: "Bolo Vegano",
         image: food_18,
         price: 12,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Cake"
-    }, {
+        description: "Bolo sem ingredientes de origem animal",
+        category: "Bolos"
+    },
+    {
         _id: "19",
-        name: "Butterscotch Cake",
+        name: "Bolo de Doce de Leite",
         image: food_19,
         price: 20,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Cake"
-    }, {
+        description: "Bolo recheado com doce de leite caseiro",
+        category: "Bolos"
+    },
+    {
         _id: "20",
-        name: "Sliced Cake",
+        name: "Bolo em Fatia",
         image: food_20,
         price: 15,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Cake"
-    }, {
+        description: "Fatia generosa de bolo do dia",
+        category: "Bolos"
+    },
+    {
         _id: "21",
-        name: "Garlic Mushroom ",
+        name: "Cogumelos ao Alho",
         image: food_21,
         price: 14,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Pure Veg"
-    }, {
+        description: "Cogumelos frescos salteados com alho e ervas",
+        category: "Vegetariano"
+    },
+    {
         _id: "22",
-        name: "Fried Cauliflower",
+        name: "Couve-flor Frita",
         image: food_22,
         price: 22,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Pure Veg"
-    }, {
+        description: "Couve-flor empanada e frita com molho especial",
+        category: "Vegetariano"
+    },
+    {
         _id: "23",
-        name: "Mix Veg Pulao",
+        name: "Arroz com Legumes",
         image: food_23,
         price: 10,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Pure Veg"
-    }, {
+        description: "Arroz integral com mix de legumes frescos",
+        category: "Vegetariano"
+    },
+    {
         _id: "24",
-        name: "Rice Zucchini",
+        name: "Abobrinha Recheada",
         image: food_24,
         price: 12,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Pure Veg"
+        description: "Abobrinha recheada com quinoa e legumes",
+        category: "Vegetariano"
     },
     {
         _id: "25",
-        name: "Cheese Pasta",
+        name: "Massa ao Queijo",
         image: food_25,
         price: 12,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Pasta"
+        description: "Massa fresca com molho quatro queijos",
+        category: "Massas"
     },
     {
         _id: "26",
-        name: "Tomato Pasta",
+        name: "Massa ao Sugo",
         image: food_26,
         price: 18,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Pasta"
-    }, {
+        description: "Massa com molho de tomate caseiro e manjericão",
+        category: "Massas"
+    },
+    {
         _id: "27",
-        name: "Creamy Pasta",
+        name: "Massa ao Creme",
         image: food_27,
         price: 16,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Pasta"
-    }, {
+        description: "Massa com molho cremoso e champignons",
+        category: "Massas"
+    },
+    {
         _id: "28",
-        name: "Chicken Pasta",
+        name: "Massa com Frango",
         image: food_28,
         price: 24,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Pasta"
-    }, {
+        description: "Massa com frango desfiado e molho branco",
+        category: "Massas"
+    },
+    {
         _id: "29",
-        name: "Buttter Noodles",
+        name: "Macarrão na Manteiga",
         image: food_29,
         price: 14,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Noodles"
-    }, {
+        description: "Macarrão na manteiga com ervas frescas",
+        category: "Macarrão"
+    },
+    {
         _id: "30",
-        name: "Veg Noodles",
+        name: "Macarrão com Legumes",
         image: food_30,
         price: 12,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Noodles"
-    }, {
+        description: "Macarrão salteado com legumes da estação",
+        category: "Macarrão"
+    },
+    {
         _id: "31",
-        name: "Somen Noodles",
+        name: "Macarrão Oriental",
         image: food_31,
         price: 20,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Noodles"
-    }, {
+        description: "Macarrão fino ao estilo oriental com legumes",
+        category: "Macarrão"
+    },
+    {
         _id: "32",
-        name: "Cooked Noodles",
+        name: "Macarrão ao Molho",
         image: food_32,
         price: 15,
-        description: "Food provides essential nutrients for overall health and well-being",
-        category: "Noodles"
+        description: "Macarrão com molho especial da casa",
+        category: "Macarrão"
     }
 ]

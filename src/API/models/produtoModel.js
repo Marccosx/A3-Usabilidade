@@ -26,6 +26,13 @@ buscarProdutosPorID:(id, callback)=>{
     })
 },
 
+buscarProdutosPorRestaurante:(id_restaurante, callback)=>{
+    db.all(`SELECT * FROM produto WHERE id_restaurante = ?`, [id_restaurante], (err, row)=>{
+        if(err) return callback(err);
+            callback(null,row);
+    });
+},
+
 edit:(id, produto, callback) => {
     const { nome, preco, descricao, id_restaurante, ativo, foto_produto } = produto;
 

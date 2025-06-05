@@ -31,7 +31,18 @@ const produtoController = {
             }
             res.status(200).json(produto);
         });
-    },	
+    },
+
+     buscarProdutosPorRestaurante: (req, res)=>{
+        const id_restaurante = req.params.id_restaurante;
+
+        produtoModel.buscarProdutosPorRestaurante(id_restaurante, (err, produtos)=>{
+            if(err){
+                return res.status(404).json({error: 'Produto não encontrado'});
+            }
+            res.status(200).json(produtos);
+        });
+     },
 
     edit:(req, res)=>{
         const id = req.params.id;

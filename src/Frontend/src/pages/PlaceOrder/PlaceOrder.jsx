@@ -10,55 +10,56 @@ const PlaceOrder = () => {
   return (
     <>
       <button className="GoBack" onClick={() => navigate("/cart")}>
-        ⬅️Go Back to Cart Page
+        ⬅️ Voltar ao Carrinho
       </button>
 
       <form className="place-order">
         <div className="place-order-left">
-          <h2 className="title">Delivery Information</h2>
+          <h2 className="title">Informações de Entrega</h2>
           <div className="multi-fields">
-            <input type="text" placeholder="First Name" />
-            <input type="text" placeholder="Last Name" />
+            <input type="text" placeholder="Nome" />
+            <input type="text" placeholder="Sobrenome" />
           </div>
-          <input type="email" placeholder="Email Address" />
-          <input type="text" placeholder="Street" />
+          <input type="email" placeholder="E-mail" />
+          <input type="text" placeholder="Endereço" />
           <div className="multi-fields">
-            <input type="text" placeholder="City" />
-            <input type="text" placeholder="State" />
+            <input type="text" placeholder="Cidade" />
+            <input type="text" placeholder="Estado" />
           </div>
           <div className="multi-fields">
-            <input type="number" placeholder="Zip Code" />
-            <input type="text" placeholder="Country" />
+            <input type="number" placeholder="CEP" />
+            <input type="text" placeholder="País" />
           </div>
-          <input type="number" placeholder="Phone" />
+          <input type="number" placeholder="Telefone" />
         </div>
 
         <div className="place-order-right">
           <div className="cart-total">
-            <h2 className="title">Cart Total</h2>
+            <h2 className="title">Resumo do Pedido</h2>
             <div>
               <div className="cart-total-details">
                 <p>Subtotal</p>
-                <p>${getTotalCartAmount()}</p>
+                <p>R$ {getTotalCartAmount().toFixed(2)}</p>
               </div>
               <hr />
               <div className="cart-total-details">
-                <p>Delivery Free</p>
-                <p>${getTotalCartAmount() === 0 ? 0 : deliveryFee}</p>
+                <p>Taxa de Entrega</p>
+                <p>R$ {getTotalCartAmount() === 0 ? "0,00" : deliveryFee.toFixed(2)}</p>
               </div>
               <hr />
               <div className="cart-total-details">
                 <b>Total</b>
                 <b>
-                  $
-                  {getTotalCartAmount() === 0
-                    ? 0
-                    : getTotalCartAmount() + deliveryFee}
+                  R$ {
+                    getTotalCartAmount() === 0
+                      ? "0,00"
+                      : (getTotalCartAmount() + deliveryFee).toFixed(2)
+                  }
                 </b>
               </div>
             </div>
             <button disabled={getTotalCartAmount() === 0}>
-              PROCEED TO Payment
+              PROSSEGUIR PARA PAGAMENTO
             </button>
           </div>
         </div>

@@ -21,17 +21,17 @@ const Cart = () => {
     <div className="cart">
       <div className="cart-items">
         <div className="cart-items-title cart-heading">
-          <p>Items</p>
-          <p>Title</p>
-          <p>Price</p>
-          <p>Quantity</p>
+          <p>Item</p>
+          <p>Nome</p>
+          <p>Preço</p>
+          <p>Quantidade</p>
           <p>Total</p>
-          <p>Remove</p>
+          <p>Remover</p>
         </div>
         <br />
         <hr />
         {totalQuantity === 0 ? (
-          <p className="NoItems">No Items in cart</p>
+          <p className="NoItems">Carrinho vazio</p>
         ) : (
           food_list.map((item, index) => {
             if (cartItems[item._id] > 0) {
@@ -41,18 +41,18 @@ const Cart = () => {
                     className="cart-items-title cart-items-item"
                     key={item._id}
                   >
-                    <img src={item.image} alt="food img" />
+                    <img src={item.image} alt="Imagem do produto" />
                     <p>{item.name}</p>
-                    <p>${item.price}</p>
+                    <p>R$ {item.price.toFixed(2)}</p>
                     <p>{cartItems[item._id]}</p>
-                    <p>${item.price * cartItems[item._id]}</p>
+                    <p>R$ {(item.price * cartItems[item._id]).toFixed(2)}</p>
                     <p
                       className="Remove"
                       onClick={() => removeFromCart(item._id)}
                     >
                       <img
                         src={assets.remove_icon_cross}
-                        alt="remove_icon_cross"
+                        alt="Remover item"
                       />
                     </p>
                   </div>
@@ -65,25 +65,26 @@ const Cart = () => {
       </div>
       <div className="cart-bottom">
         <div className="cart-total">
-          <h2>Cart Total</h2>
+          <h2>Resumo do Pedido</h2>
           <div>
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>R$ {getTotalCartAmount().toFixed(2)}</p>
             </div>
             <hr />
             <div className="cart-total-details">
-              <p>Delivery Free</p>
-              <p>${getTotalCartAmount() === 0 ? 0 : deliveryFee}</p>
+              <p>Taxa de Entrega</p>
+              <p>R$ {getTotalCartAmount() === 0 ? "0,00" : deliveryFee.toFixed(2)}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
               <b>
-                $
-                {getTotalCartAmount() === 0
-                  ? 0
-                  : getTotalCartAmount() + deliveryFee}
+                R$ {
+                  getTotalCartAmount() === 0
+                    ? "0,00"
+                    : (getTotalCartAmount() + deliveryFee).toFixed(2)
+                }
               </b>
             </div>
           </div>
@@ -91,15 +92,15 @@ const Cart = () => {
             disabled={getTotalCartAmount() === 0}
             onClick={() => navigate("/order")}
           >
-            PROCEED TO CHECKOUT
+            FINALIZAR PEDIDO
           </button>
         </div>
         <div className="cart-promocode">
           <div>
-            <p>If you have a promocode, Enter it here</p>
+            <p>Se você tem um cupom promocional, insira aqui</p>
             <div className="cart-promocode-input">
-              <input type="text" placeholder="Promo Code" />
-              <button>Submit</button>
+              <input type="text" placeholder="Código promocional" />
+              <button>Aplicar</button>
             </div>
           </div>
         </div>

@@ -11,42 +11,41 @@ const Footer = () => {
         <div className="footer-content-left">
           <img src={assets.logo} alt="logo" />
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit
-            ratione fugiat vitae quisquam dolores sint id, nisi veniam
-            repellendus. Tempore, expedita. At praesentium deserunt minima!
-            Porro iste beatae maxime voluptatem?
+            Somos apaixonados por entregar felicidade através de pratos deliciosos.
+            Nossa missão é proporcionar a melhor experiência gastronômica,
+            conectando você aos melhores restaurantes da cidade.
           </p>
           <div className="footer-social-icons">
             <a href="https://www.facebook.com">
-              <img src={assets.facebook_icon} alt="facebook" />
+              <img src={assets.facebook_icon} alt="Facebook" />
             </a>
             <a href="https://www.twitter.com">
-              <img src={assets.twitter_icon} alt="twitter" />
+              <img src={assets.twitter_icon} alt="Twitter" />
             </a>
             <a href="https://www.linkedin.com">
-              <img src={assets.linkedin_icon} alt="linkedin" />
+              <img src={assets.linkedin_icon} alt="LinkedIn" />
             </a>
           </div>
         </div>
         <div className="footer-content-center">
-          <h2>COMPANY</h2>
+          <h2>EMPRESA</h2>
           <ul>
-            <li onClick={() => navigate("/")}>Home</li>
-            <li>About Us</li>
-            <li>Delivery</li>
-            <li>Privacy Policy</li>
+            <li onClick={() => navigate("/")}>Início</li>
+            <li>Sobre Nós</li>
+            <li>Entregas</li>
+            <li>Política de Privacidade</li>
           </ul>
         </div>
         <div className="footer-content-right">
-          <h2>GET IN TOUCH</h2>
+          <h2>CONTATO</h2>
           <ul>
-            <li>+1-123-456-7890</li>
-            <li>contact@tomato.com</li>
+            <li>+55 11 99999-9999</li>
+            <li>contato@pedeja.com.br</li>
           </ul>
         </div>
       </div>
       <hr />
-      <p className="footer-copyright">Copyright 2024 © Tomato.com</p>
+      <p className="footer-copyright">Copyright 2025 © pedeja.com.br</p>
     </footer>
   );
 };

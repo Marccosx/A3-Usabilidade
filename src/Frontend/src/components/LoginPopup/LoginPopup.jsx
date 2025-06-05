@@ -2,8 +2,47 @@ import React, { useState } from "react";
 import "./LoginPopup.css";
 import { assets } from "../../assets/assets";
 
-const LoginPopup = ({ setShowLogin }) => {
+const LoginPopup = ({ setShowLogin, setUserName }) => {
   const [currentState, setCurrentState] = useState("Login");
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const url =
+      currentState === "Sign up"
+        ? "http://localhost:3000/usuarios/cadastro"
+        : "http://localhost:3000/usuarios/login";
+    const payload =
+      currentState === "Sign up"
+        ? { nome: form.name, email: form.email, senha: form.password, id_grupo: "3" }
+        : { email: form.email, senha: form.password };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        const nome = data.usuario?.nome || data.usuario?.name || data.nome || data.name || "Usuário";
+        const idGrupo = data.usuario?.id_grupo || data.id_grupo || 3;
+        setUserName(nome);
+        localStorage.setItem("userName", nome);
+        localStorage.setItem("idGrupo", idGrupo);
+        alert("Sucesso!");
+        setShowLogin(false);
+      } else {
+        alert(data.message || "Erro ao autenticar");
+      }
+    } catch (err) {
+      alert("Erro de conexão");
+    }
+  };
 
   return (
     <div className="login-popup">
@@ -15,11 +54,11 @@ const LoginPopup = ({ setShowLogin }) => {
         onClick={() => setShowLogin(false)}
       />
 
-      <form className="login-popup-container">
+      <form className="login-popup-container" onSubmit={handleSubmit}>
         {/* Título e mensagem */}
         <div className="login-popup-header">
           <h1>Bem-vindo</h1>
-          <p>Faça seu login </p>
+          <p>Faça seu login</p>
           {currentState === "Login" ? (
             <span>
               Ainda não tem uma conta?
@@ -36,10 +75,31 @@ const LoginPopup = ({ setShowLogin }) => {
         {/* Campos de entrada */}
         <div className="login-popup-inputs">
           {currentState === "Sign up" && (
-            <input type="text" placeholder="Seu nome" required />
+            <input
+              type="text"
+              name="name"
+              placeholder="Seu nome"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
           )}
-          <input type="email" placeholder="Seu e-mail" required />
-          <input type="password" placeholder="Senha" required />
+          <input
+            type="email"
+            name="email"
+            placeholder="Seu e-mail"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Sua senha"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         {/* Botão */}

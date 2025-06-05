@@ -52,6 +52,15 @@ const restauranteModel = {
         });
     },
 
+    buscarRestaurantePorUsuario: (id_usuario, callback)=>{
+        db.all(`SELECT * FROM restaurante WHERE id_usuario=?`, [id_usuario], (err, row)=>{
+            if(err) return callback(err);
+            callback(null, row);
+        });
+    },
+
+  
+
     delete: (id, callback) => {
         db.run(
             `DELETE FROM restaurante WHERE id=?`,

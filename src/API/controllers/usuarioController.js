@@ -40,7 +40,7 @@ const UsuarioController = {
         return res.status(401).json({ erro: 'Senha incorreta.' });
       }
 
-      res.status(200).json({ mensagem: 'Login realizado com sucesso.', usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email } });
+      res.status(200).json({ mensagem: 'Login realizado com sucesso.', usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email, id_grupo: usuario.id_grupo,} });
     });
   },
   listarTodos: (req, res) => {

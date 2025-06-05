@@ -30,6 +30,7 @@ const restauranteRoutes = require('./routes/restauranteRoutes');
 const produtoRoutes = require('./routes/produtoRoutes');
 const pedidoRoutes = require('./routes/pedidoRoutes');
 const carrinhoPedidosRoutes = require('./routes/carrinhoRoutes');
+const avaliacoesRoutes = require('./routes/avaliacaoRoutes');
 
 app.use('/enderecos', enderecoRoutes);
 app.use('/usuarios', usuarioRoutes);
@@ -38,6 +39,7 @@ app.use('/restaurantes', restauranteRoutes);
 app.use('/produtos', produtoRoutes);
 app.use('/pedidos', pedidoRoutes);
 app.use('/carrinho', carrinhoPedidosRoutes);
+app.use('/avaliacoes', avaliacoesRoutes);
 
 app.listen(PORTA, () => {
   console.log(`Servidor rodando em http://localhost:${PORTA}`);

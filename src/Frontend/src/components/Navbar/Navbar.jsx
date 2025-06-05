@@ -4,7 +4,7 @@ import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ setShowLogin }) => {
+const Navbar = ({ setShowLogin, userName, handleLogout, idGrupo }) => {
   const { getTotalQuantity } = useContext(StoreContext);
   const totalQuantity = getTotalQuantity();
 
@@ -21,35 +21,57 @@ const Navbar = ({ setShowLogin }) => {
           onClick={() => setMenu("home")}
           className={menu === "home" ? "active" : ""}
         >
-          Home
+          Início
         </Link>
         <a
           href="#explore-menu"
           onClick={() => setMenu("menu")}
           className={menu === "menu" ? "active" : ""}
         >
-          Menu
+          Cardápio
         </a>
-       
+        {idGrupo !== "3" && (
+          <Link
+            to="/restaurantes"
+            onClick={() => setMenu("restaurantes")}
+            className={menu === "restaurantes" ? "active" : ""}
+          >
+            Restaurantes
+          </Link>
+        )}
+        <Link
+          to="/pedidos"
+          onClick={() => setMenu("pedidos")}
+          className={menu === "pedidos" ? "active" : ""}
+        >
+          Pedidos
+        </Link>
         <a
           href="#footer"
           onClick={() => setMenu("contact-us")}
           className={menu === "contact-us" ? "active" : ""}
         >
-          Contate-nos
+          Contato
         </a>
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="search_icon" />
+        <img src={assets.search_icon} alt="Buscar" />
         <div className="navbar-basket-icon">
           <Link to="/cart">
-            <img src={assets.basket_icon} alt="basket_icon" />
+            <img src={assets.basket_icon} alt="Carrinho" />
           </Link>
           <div className={totalQuantity === 0 ? "dotHidden" : "dot"}>
             <p>{totalQuantity}</p>
           </div>
         </div>
-        <button onClick={() => setShowLogin(true)}>Entrar</button>
+        {userName ? (
+          <>
+            <span>Olá, {userName}!</span>
+            <button onClick={handleLogout}>Sair</button>
+          </>
+        ) : (
+          <button onClick={() => setShowLogin(true)}>Entrar</button>
+        )}
       </div>
     </div>
   );

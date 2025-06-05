@@ -5,7 +5,7 @@ import { menu_list } from "../../assets/assets";
 const ExploreMenu = ({ category, setCategory }) => {
   return (
     <div className="explore-menu" id="explore-menu">
-      <h1>O que você deseja comer?</h1>
+      <h1>O que você deseja comer hoje?</h1>
 
       <div className="explore-menu-list">
         {menu_list.map((item, index) => {
@@ -22,7 +22,7 @@ const ExploreMenu = ({ category, setCategory }) => {
               <img
                 src={item.menu_image}
                 className={category === item.menu_name ? "active" : ""}
-                alt="menu_image"
+                alt={item.menu_name}
               />
               <p>{item.menu_name}</p>
             </div>

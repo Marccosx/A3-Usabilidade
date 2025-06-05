@@ -12,7 +12,16 @@ const UsuarioModel = {
 
     listarTodos: (callback) => {
         db.all(`SELECT * FROM usuario`, callback);
-    }
+    },
+
+    edit:(id, usuario, callback)=>{
+        const {nome, email, senha, id_grupo} = usuario;
+
+        db.run(`UPDATE usuario SET nome=?, email=?, senha=?, id_grupo=? WHERE id=?`, [nome, email, senha, id_grupo, id], function (err) {
+            if (err) return callback(err);
+            callback(null, { changes: this.changes });
+        });
+    },
 }
 
 module.exports = UsuarioModel;

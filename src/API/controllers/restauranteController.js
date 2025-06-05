@@ -1,12 +1,11 @@
 const restauranteModel = require('../models/restauranteModel');
-const { edit } = require('./cidadeController');
-const { list } = require('./enderecoController');
+
 
 const restauranteController = {
     create:(req, res) => {
-        const { nome, taxaFrete, ativo, aberto, avaliacao, foto, id_endereco } = req.body;
+        const { nome, taxaFrete, ativo, aberto, foto, id_endereco } = req.body;
 
-        if (!nome || !taxaFrete || !ativo || !aberto || !avaliacao || !foto || !id_endereco) {
+        if (!nome || !taxaFrete || !ativo || !aberto || !foto || !id_endereco) {
             return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
         }
 
@@ -54,21 +53,52 @@ const restauranteController = {
         })
     },
 
-    filtro:(req, res) => {
-        const { nome } = req.query;
+    listarRestauranteporUsuario:(req, res)=>{
+        const id_usuario = req.params.id_usuario;
 
-        if (!nome) {
-            return res.status(400).json({ erro: 'O parâmetro "nome" é obrigatório.' });
+        if(!usuario){
+            return res.status(404).json({erro:'Insira od id do usuario'});
+        }
+        restauranteModel.buscarRestaurantePorUsuario(id_usuario,(err, restaurantes)=>{
+            if(err){
+                return res.status(500).json({erro: 'Erro ao listar restaurantes.', detalhe: err.message});
+            }
+            res.status(200).json(restaurantes);
+        });
+    },
+
+    listarRestauranteporID:(req, res)=>{
+        const id = req.params.id;
+
+        if(!id) {
+            return res.status(404).json({erro:'Insira o id do restaurante.',});
         }
 
-        restauranteModel.buscarRestaurantePorNome(nome, (err, restaurante) => {
-            if (err) {
-                return res.status(500).json({ erro: 'Erro ao buscar restaurante.', detalhe: err.message });
+        restauranteModel.buscarRestaurantePorId(id, (err, restaurante)=>{
+            if(err){
+                return res.status(500).json({erro:'Erro ao buscar restaurante', detalhe: err.message});
             }
-            if (!restaurante) {
-                return res.status(404).json({ erro: 'Restaurante não encontrado.' });
+            if(!restaurante){
+                return res.status(404).json({erro: 'Restaurante não encontrado', detalhe: err.message});
             }
             res.status(200).json(restaurante);
+        })
+
+    },
+
+    listarAvaliacaoes: (req, res)=>{
+        const id_restaurante = req.params.id_restaurante;
+
+        if(!id_restaurante){
+            return res.status(400).json({erro: 'Restaurante não encontrado'})
+        }
+        restauranteModel.listarAvaliacaoes(id_restaurante,(err, avaliacoes)=>{
+           if(err){
+            return res.status(500).json({erro: 'Erro ao buscar restaurante', detalhe: err.message});
+           }if(!avaliacoes){
+            return res.status(404).json({erro: 'Avaliações não encontradas' });
+           }
+           res.status(200).json(avaliacoes);
         });
     },
 
