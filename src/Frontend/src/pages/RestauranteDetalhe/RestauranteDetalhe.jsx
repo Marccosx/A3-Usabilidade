@@ -109,60 +109,72 @@ const RestauranteDetalhe = () => {
                         </div>
                     ) : (
                         <div className="menu-grid">
-                            {cardapio.map(item => (
-                                <div key={item.id} className="menu-item">
-                                    <div className="menu-item-img-container">
-                                        <img
-                                            src={item.imagem || assets.default_food}
-                                            alt={item.nome}
-                                            className="menu-item-img"
-                                            onError={(e) => {
-                                                e.target.src = assets.default_food;
-                                            }}
-                                        />
-                                        {!cartItems[item.id] ? (
+                            {cardapio.map(item => {
+                                // Parse da imagem salva como JSON
+                                let imagemSrc = assets.default_food;
+                                if (item.foto_produto) {
+                                    try {
+                                        const imgObj = JSON.parse(item.foto_produto);
+                                        imagemSrc = imgObj.caminho || assets.default_food;
+                                    } catch {
+                                        imagemSrc = item.foto_produto || assets.default_food;
+                                    }
+                                }
+                                return (
+                                    <div key={item.id} className="menu-item">
+                                        <div className="menu-item-img-container">
                                             <img
-                                                src={assets.add_icon_white}
-                                                alt="add_icon_white"
-                                                className="add"
-                                                onClick={() => addToCart(item.id)}
+                                                src={imagemSrc}
+                                                alt={item.nome}
+                                                className="menu-item-img"
+                                                onError={(e) => {
+                                                    e.target.src = assets.default_food;
+                                                }}
                                             />
-                                        ) : (
-                                            <div className="food-item-counter">
+                                            {!cartItems[item.id] ? (
                                                 <img
-                                                    src={assets.remove_icon_red}
-                                                    alt="remove_icon_red"
-                                                    onClick={() => removeFromCart(item.id)}
-                                                />
-                                                <p>{cartItems[item.id]}</p>
-                                                <img
-                                                    src={assets.add_icon_green}
-                                                    alt="add_icon_green"
+                                                    src={assets.add_icon_white}
+                                                    alt="add_icon_white"
+                                                    className="add"
                                                     onClick={() => addToCart(item.id)}
                                                 />
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className="menu-item-info">
-                                        <div className="menu-item-name-rating">
-                                            <h3>{item.nome}</h3>
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                             width="24" height="24" 
-                                             viewBox="0 0 24 24">
-                                                <path fill="#fbed02" 
-                                                d="m12 17.275l-4.15 2.5q-.275.175-.575.15t-.525-.2t-.35-.437t-.05-.588l1.1-4.725L3.775
-                                                 10.8q-.25-.225-.312-.513t.037-.562t.3-.45t.55-.225l4.85-.425l1.875-4.45q.125-.3.388-.45t.537-.15t.537.15t.388.45l1.875 
-                                                 4.45l4.85.425q.35.05.55.225t.3.45t.038.563t-.313.512l-3.675
-                                                  3.175l1.1 4.725q.075.325-.05.588t-.35.437t-.525.2t-.575-.15z" />
-                                                  </svg>
+                                            ) : (
+                                                <div className="food-item-counter">
+                                                    <img
+                                                        src={assets.remove_icon_red}
+                                                        alt="remove_icon_red"
+                                                        onClick={() => removeFromCart(item.id)}
+                                                    />
+                                                    <p>{cartItems[item.id]}</p>
+                                                    <img
+                                                        src={assets.add_icon_green}
+                                                        alt="add_icon_green"
+                                                        onClick={() => addToCart(item.id)}
+                                                    />
+                                                </div>
+                                            )}
                                         </div>
-                                        <p className="menu-item-desc">{item.descricao}</p>
-                                        <p className="menu-item-price">
-                                            R$ {typeof item.preco === 'number' ? item.preco.toFixed(2) : '0.00'}
-                                        </p>
+                                        <div className="menu-item-info">
+                                            <div className="menu-item-name-rating">
+                                                <h3>{item.nome}</h3>
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                 width="24" height="24" 
+                                                 viewBox="0 0 24 24">
+                                                    <path fill="#fbed02" 
+                                                    d="m12 17.275l-4.15 2.5q-.275.175-.575.15t-.525-.2t-.35-.437t-.05-.588l1.1-4.725L3.775
+                                                     10.8q-.25-.225-.312-.513t.037-.562t.3-.45t.55-.225l4.85-.425l1.875-4.45q.125-.3.388-.45t.537-.15t.537.15t.388.45l1.875 
+                                                     4.45l4.85.425q.35.05.55.225t.3.45t.038.563t-.313.512l-3.675
+                                                      3.175l1.1 4.725q.075.325-.05.588t-.35.437t-.525.2t-.575-.15z" />
+                                                      </svg>
+                                            </div>
+                                            <p className="menu-item-desc">{item.descricao}</p>
+                                            <p className="menu-item-price">
+                                                R$ {typeof item.preco === 'number' ? item.preco.toFixed(2) : '0.00'}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     )}
                 </section>
@@ -175,4 +187,4 @@ const RestauranteDetalhe = () => {
     );
 };
 
-export default RestauranteDetalhe; 
+export default RestauranteDetalhe;
