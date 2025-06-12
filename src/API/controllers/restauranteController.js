@@ -9,9 +9,9 @@ const restauranteController = {
             return res.status(400).json({ erro: 'Campo nome é obrigatório.' });
         } if(!taxaFrete ){
             return res.status(400).json({ erro: 'Campo taxa de frete é obrigatório.' });
-        }if( !ativo) {
+        }if( ativo === undefined) {
             return res.status(400).json({ erro: 'Campo ativo é obrigatório.' });}
-            if(!aberto){
+            if(aberto === undefined){
                 return res.status(400).json({ erro: 'Campo aberto é obrigatório.' });
             }if(!foto ) {
                 return res.status(400).json({ erro: 'Campo foto é obrigatório.' });
