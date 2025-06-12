@@ -55,6 +55,72 @@ db.serialize(() => {
     db.run(`INSERT INTO estado (id, nome, sigla) VALUES (?, ?, ?)`, [estado.id, estado.nome, estado.sigla]);
   });
   
+  const cidadesPrincipais = [
+  // Acre
+  { id: 1, nome: 'Rio Branco', id_estado: 1 },
+  // Alagoas
+  { id: 2, nome: 'Maceió', id_estado: 2 },
+  // Amapá
+  { id: 3, nome: 'Macapá', id_estado: 3 },
+  // Amazonas
+  { id: 4, nome: 'Manaus', id_estado: 4 },
+  // Bahia
+  { id: 5, nome: 'Salvador', id_estado: 5 },
+  { id: 6, nome: 'Feira de Santana', id_estado: 5 },
+  // Ceará
+  { id: 7, nome: 'Fortaleza', id_estado: 6 },
+  // Distrito Federal
+  { id: 8, nome: 'Brasília', id_estado: 7 },
+  // Espírito Santo
+  { id: 9, nome: 'Vitória', id_estado: 8 },
+  // Goiás
+  { id: 10, nome: 'Goiânia', id_estado: 9 },
+  // Maranhão
+  { id: 11, nome: 'São Luís', id_estado: 10 },
+  // Mato Grosso
+  { id: 12, nome: 'Cuiabá', id_estado: 11 },
+  // Mato Grosso do Sul
+  { id: 13, nome: 'Campo Grande', id_estado: 12 },
+  // Minas Gerais
+  { id: 14, nome: 'Belo Horizonte', id_estado: 13 },
+  { id: 15, nome: 'Juiz de Fora', id_estado: 13 },
+  // Pará
+  { id: 16, nome: 'Belém', id_estado: 14 },
+  // Paraíba
+  { id: 17, nome: 'João Pessoa', id_estado: 15 },
+  // Paraná
+  { id: 18, nome: 'Curitiba', id_estado: 16 },
+  { id: 19, nome: 'Cascavel', id_estado: 16 },
+  // Pernambuco
+  { id: 20, nome: 'Recife', id_estado: 17 },
+  // Piauí
+  { id: 21, nome: 'Teresina', id_estado: 18 },
+  // Rio de Janeiro
+  { id: 22, nome: 'Rio de Janeiro', id_estado: 19 },
+  { id: 23, nome: 'São Gonçalo', id_estado: 19 },
+  // Rio Grande do Norte
+  { id: 24, nome: 'Natal', id_estado: 20 },
+  // Rio Grande do Sul
+  { id: 25, nome: 'Porto Alegre', id_estado: 21 },
+  { id: 26, nome: 'Caxias do Sul', id_estado: 21 },
+  // Rondônia
+  { id: 27, nome: 'Porto Velho', id_estado: 22 },
+  // Roraima
+  { id: 28, nome: 'Boa Vista', id_estado: 23 },
+  // Santa Catarina
+  { id: 29, nome: 'Florianópolis', id_estado: 24 },
+  { id: 30, nome: 'Joinville', id_estado: 24 },
+  // São Paulo
+  { id: 31, nome: 'São Paulo', id_estado: 25 },
+  { id: 32, nome: 'Guarulhos', id_estado: 25 },
+  // Sergipe
+  { id: 33, nome: 'Aracaju', id_estado: 26 },
+  // Tocantins
+  { id: 34, nome: 'Palmas', id_estado: 27 }
+];
+cidadesPrincipais.forEach(cidade =>{
+ db.run(`INSERT INTO cidade (id, nome, id_estado) VALUES (?, ?,?)` , [cidade.id, cidade.nome, cidade.id_estado]);
+});
 
   const perimssoes = [
   { id: 1, nome: 'cadastrar restaurante' },

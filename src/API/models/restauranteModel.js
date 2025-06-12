@@ -4,10 +4,10 @@ const db = require('../databases/connection');
 const restauranteModel = {
 
     create: (restaurante, callback) => {
-        const { nome, taxaFrete, ativo, aberto, avaliacao, foto, id_endereco } = restaurante;
+        const { nome, taxaFrete, ativo, aberto,  foto, id_endereco } = restaurante;
         db.run(
-            `INSERT INTO restaurante (nome, taxaFrete, ativo, aberto, avaliacao, foto, id_endereco) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [nome, taxaFrete, ativo, aberto, avaliacao, foto, id_endereco],
+            `INSERT INTO restaurante (nome, taxaFrete, ativo, aberto, foto, id_endereco) VALUES (?, ?, ?, ?, ?, ?)`,
+            [nome, taxaFrete, ativo, aberto, foto, id_endereco],
             function (err) {
                 if (err) return callback(err);
                 callback(null, { id: this.lastID });
@@ -16,10 +16,10 @@ const restauranteModel = {
     },
 
     edit: (id, restaurante, callback) => {
-        const { nome, taxaFrete, ativo, aberto, avaliacao, foto, id_endereco } = restaurante;
+        const { nome, taxaFrete, ativo, aberto, foto, id_endereco } = restaurante;
         db.run(
-            `UPDATE restaurante SET nome=?, taxaFrete=?, ativo=?, aberto=?, avaliacao=?, foto=?, id_endereco=? WHERE id=?`,
-            [nome, taxaFrete, ativo, aberto, avaliacao, foto, id_endereco, id],
+            `UPDATE restaurante SET nome=?, taxaFrete=?, ativo=?, aberto=?, foto=?, id_endereco=? WHERE id=?`,
+            [nome, taxaFrete, ativo, aberto, foto, id_endereco, id],
             function (err) {
                 if (err) return callback(err);
                 callback(null, { changes: this.changes });

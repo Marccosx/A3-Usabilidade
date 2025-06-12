@@ -42,6 +42,9 @@ const cidadeModel = {
             }
         );
     },
+    buscarCidadePorIDEstado: (id_estado, callback) =>{
+        db.all(`SELECT * FROM cidade WHERE id_estado =?`, [id_estado], callback );
+    },
     delete: (id, callback) => {
         db.run(
             `DELETE FROM cidade WHERE id=?`,

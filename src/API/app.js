@@ -11,6 +11,7 @@ const createRestaurante = require('./databases/migrations/003_create_tables_rest
 const createProduto = require('./databases/migrations/004_create_tables_produto');
 const createPedido = require('./databases/migrations/005_create_tables_pedido');
 
+
 createUsuario();
 createEndereco();
 createRestaurante();
@@ -31,7 +32,9 @@ const produtoRoutes = require('./routes/produtoRoutes');
 const pedidoRoutes = require('./routes/pedidoRoutes');
 const carrinhoPedidosRoutes = require('./routes/carrinhoRoutes');
 const avaliacoesRoutes = require('./routes/avaliacaoRoutes');
+const estadoRoutes = require('./routes/estadoRoutes');
 
+app.use('/estados', estadoRoutes);
 app.use('/enderecos', enderecoRoutes);
 app.use('/usuarios', usuarioRoutes);
 app.use('/cidades', cidadeRoutes);

@@ -2,40 +2,51 @@ const cidadeModel = require('../models/cidadeModel');
 
 const cidadeController = {
 
-    create: async(req, res)=>{
-        const {nome, id_estado} = req.body;
+    create: async (req, res) => {
+        const { nome, id_estado } = req.body;
 
-        if(!nome || !id_estado){
-            return res.status(400).json({erro: "Todos os campos são obrigatórios"})
+        if (!nome || !id_estado) {
+            return res.status(400).json({ erro: "Todos os campos são obrigatórios" });
         }
 
-        cidadeModel.buscarCidadePorNomeEstado(nome, id_estado, (err, cidadeExistente)=>{
+        cidadeModel.buscarCidadePorNomeEstado(id_estado, (err, cidadeExistente) => {
             if (err) {
-            return res.status(500).json({ erro: 'Erro ao buscar cidade.', detalhe: err.message });
-        }
-        if (cidadeExistente) {
-            return res.status(400).json({ erro: 'Cidade já cadastrada.' });
-        }
-        })
-        cidadeModel.create({nome,id_estado}, (err)=>{
-            if (err) {
-            return res.status(500).json({ erro: 'Erro ao cadastrar cidade.', detalhe: err.message });
+                return res.status(500).json({ erro: 'Erro ao buscar cidade.', detalhe: err.message });
             }
-            res.status(201).json({ mensagem: 'Cidade cadastrado com sucesso!' });
+            if (cidadeExistente) {
+                return res.status(400).json({ erro: 'Cidade já cadastrada.' });
+            }
+
+            // Só cria se não existir
+            cidadeModel.create({ nome, id_estado }, (err, id) => {
+                if (err) {
+                    return res.status(500).json({ erro: 'Erro ao cadastrar cidade.', detalhe: err.message });
+                }
+                res.status(201).json({ id });
+            });
         });
     },
 
-    show: async (req, res) => {
-        cidadeModel.list((err, cidades) => {
-            if (err) return res.status(500).json({ erro: 'Erro ao listar as cidades.', detalhe: err.message });
+     list: (req, res) => {
+        enderecoModel.list((err, cidades) => {
+            if (err) return res.status(500).json({ erro: 'Erro ao listar cidades.', detalhe: err.message });
             res.status(200).json(cidades);
         });
     },
 
-    edit: async (req, res) => {
-        const { id, nome, id_estado } = req.body;
+    show: async (req, res) => {
+        const {id} = req.params;
+        cidadeModel.buscarCidadePorId(id,(err, cidade) => {
+            if (err) return res.status(500).json({ erro: 'Erro ao listar as cidade.', detalhe: err.message });
+            res.status(200).json(cidade);
+        });
+    },
 
-        if (!id || !nome || !id_estado) {
+    edit: async (req, res) => {
+        const { nome, id_estado } = req.body;
+        const { id } = req.params;
+
+        if (!id) {
             return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
         }
 
@@ -69,6 +80,14 @@ const cidadeController = {
                 if (err) return res.status(500).json({ erro: 'Erro ao deletar cidade.', detalhe: err.message });
                 res.status(200).json({ mensagem: 'Cidade deletada com sucesso.' });
             });
+        });
+    },
+
+    listarCidadePorEstado: async (req, res) => {
+        const { id_estado } = req.params;
+        cidadeModel.buscarCidadePorIDEstado(id_estado, (err, cidades) => {
+            if (err) return res.status(500).json({ erro: err.message });
+            res.json(cidades);
         });
     }
 };

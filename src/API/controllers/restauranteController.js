@@ -5,8 +5,18 @@ const restauranteController = {
     create:(req, res) => {
         const { nome, taxaFrete, ativo, aberto, foto, id_endereco } = req.body;
 
-        if (!nome || !taxaFrete || !ativo || !aberto || !foto || !id_endereco) {
-            return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
+        if (!nome ){
+            return res.status(400).json({ erro: 'Campo nome é obrigatório.' });
+        } if(!taxaFrete ){
+            return res.status(400).json({ erro: 'Campo taxa de frete é obrigatório.' });
+        }if( !ativo) {
+            return res.status(400).json({ erro: 'Campo ativo é obrigatório.' });}
+            if(!aberto){
+                return res.status(400).json({ erro: 'Campo aberto é obrigatório.' });
+            }if(!foto ) {
+                return res.status(400).json({ erro: 'Campo foto é obrigatório.' });
+            } if(!id_endereco) {
+            return res.status(400).json({ erro: 'Campo id_endereco é obrigatório.' });
         }
 
         restauranteModel.buscarRestaurantePorNome(nome, (err, restauranteExistente) => {
@@ -14,7 +24,7 @@ const restauranteController = {
                 return res.status(400).json({ erro: 'Restaurante já cadastrado.' });
             }
 
-            restauranteModel.create({ nome, taxaFrete, ativo, aberto, avaliacao, foto, id_endereco }, (err) => {
+            restauranteModel.create({ nome, taxaFrete, ativo, aberto, foto, id_endereco }, (err) => {
                 if (err) {
                     return res.status(500).json({ erro: 'Erro ao cadastrar restaurante.', detalhe: err.message });
                 }
@@ -24,9 +34,9 @@ const restauranteController = {
     },
     edit:(req, res) => {
         const id = req.params.id;
-        const { nome, taxaFrete, ativo, aberto, avaliacao, foto, id_endereco } = req.body;
+        const { nome, taxaFrete, ativo, aberto, foto, id_endereco } = req.body;
 
-        if (!nome || taxaFrete === undefined || ativo === undefined  || aberto === undefined  || !avaliacao || !foto || !id_endereco) {
+        if (!nome || taxaFrete === undefined || ativo === undefined  || aberto === undefined  ||  !foto || !id_endereco) {
             return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
         }
 
@@ -35,7 +45,7 @@ const restauranteController = {
                 return res.status(404).json({ erro: 'Restaurante não encontrado.' });
             }
 
-            restauranteModel.edit(id, { nome, taxaFrete, ativo, aberto, avaliacao, foto, id_endereco }, (err) => {
+            restauranteModel.edit(id, { nome, taxaFrete, ativo, aberto, foto, id_endereco }, (err) => {
                 if (err) {
                     return res.status(500).json({ erro: 'Erro ao editar restaurante.', detalhe: err.message });
                 }
