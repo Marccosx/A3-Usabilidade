@@ -15,8 +15,8 @@ function criarTablesRestaurante(){
             
             id_endereco INTEGER,
             id_usuario INTEGER,
-            FOREIGN KEY (id_endereco) REFERENCES endereco(id),
-            FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+            FOREIGN KEY (id_endereco) REFERENCES endereco(id) ON DELETE CASCADE,
+            FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE
             );
          `);
 
@@ -37,7 +37,7 @@ function criarTablesRestaurante(){
                 data DATETIME DEFAULT CURRENT_TIMESTAMP,
               
                 id_restaurante INTEGER,
-                FOREIGN KEY (id_restaurante) REFERENCES restaurante(id)
+                FOREIGN KEY (id_restaurante) REFERENCES restaurante(id) ON DELETE CASCADE
                 );`);
     
     })

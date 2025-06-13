@@ -137,7 +137,7 @@ const Restaurantes = () => {
         if (window.confirm('Tem certeza que deseja excluir este restaurante?')) {
             try {
                 const response = await axios.delete(`http://localhost:3000/restaurantes/delete/${id}`);
-                if (response.status === 201) {
+                if (response.status === 200) {
                     carregarRestaurantes();
                     setErro('');
                 } else {
@@ -243,10 +243,12 @@ const Restaurantes = () => {
                                 </label>
                                 <input
                                     id="foto"
+                                    name="foto"
                                     type="file"
                                     accept="image/*"
                                     onChange={handleImageChange}
                                     className="foto-perfil-input"
+                                     
                                 />
                             </div>
                         </div>
@@ -258,7 +260,7 @@ const Restaurantes = () => {
                                 placeholder="Nome do Restaurante"
                                 value={novoRestaurante.nome}
                                 onChange={(e) => setNovoRestaurante({ ...novoRestaurante, nome: e.target.value })}
-                                required
+                                required={!editando}
                             />
                         </div>
                         <div className="form-group">
@@ -270,7 +272,7 @@ const Restaurantes = () => {
                                 placeholder="Taxa de Entrega"
                                 value={novoRestaurante.taxaFrete}
                                 onChange={(e) => setNovoRestaurante({ ...novoRestaurante, taxaFrete: parseFloat(e.target.value) })}
-                                required
+                                required={!editando}
                             />
                         </div>
                         <div className="form-group">
@@ -281,6 +283,7 @@ const Restaurantes = () => {
                                         type="checkbox"
                                         checked={novoRestaurante.aberto}
                                         onChange={(e) => setNovoRestaurante({ ...novoRestaurante, aberto: e.target.checked })}
+                                       
                                     />
                                     <span className="toggle-slider"></span>
                                 </label>
@@ -294,6 +297,7 @@ const Restaurantes = () => {
                                         type="checkbox"
                                         checked={novoRestaurante.ativo}
                                         onChange={(e) => setNovoRestaurante({ ...novoRestaurante, ativo: e.target.checked })}
+                                       
                                     />
                                     <span className="toggle-slider"></span>
                                 </label>
@@ -310,8 +314,9 @@ const Restaurantes = () => {
                                 id="estado"
                                 value={estadoSelecionado}
                                 onChange={e => setEstadoSelecionado(e.target.value)}
-                                required
+                                required={!editando}
                                 className="form-control"
+                                
                             >
                                 <option value="">Selecione o Estado</option>
                                 {estados.map(estado => (
@@ -327,7 +332,7 @@ const Restaurantes = () => {
                                 id="cidade"
                                 value={cidadeSelecionada}
                                 onChange={e => setCidadeSelecionada(e.target.value)}
-                                required
+                                required={!editando}
                                 className="form-control"
                                 disabled={!estadoSelecionado}
                             >
@@ -346,7 +351,7 @@ const Restaurantes = () => {
                                 id="rua"
                                 value={endereco.rua}
                                 onChange={e => setEndereco({ ...endereco, rua: e.target.value })}
-                                required
+                                required={!editando}
                             />
                         </div>
                         <div className="form-group">
@@ -356,7 +361,7 @@ const Restaurantes = () => {
                                 id="numero"
                                 value={endereco.numero}
                                 onChange={e => setEndereco({ ...endereco, numero: e.target.value })}
-                                required
+                                required={!editando}
                             />
                         </div>
                         <div className="form-group">
@@ -366,7 +371,7 @@ const Restaurantes = () => {
                                 id="bairro"
                                 value={endereco.bairro}
                                 onChange={e => setEndereco({ ...endereco, bairro: e.target.value })}
-                                required
+                                required={!editando}
                             />
                         </div>
                         <div className="form-group">
@@ -376,7 +381,7 @@ const Restaurantes = () => {
                                 id="cep"
                                 value={endereco.cep}
                                 onChange={e => setEndereco({ ...endereco, cep: e.target.value })}
-                                required
+                                required={!editando}
                             />
                         </div>
                         <div className="form-group" style={{gridColumn: '1 / -1'}}>
@@ -386,6 +391,8 @@ const Restaurantes = () => {
                                 id="complemento"
                                 value={endereco.complemento}
                                 onChange={e => setEndereco({ ...endereco, complemento: e.target.value })}
+                                placeholder="Apto, Bloco, etc."
+                                required={!editando}
                             />
                         </div>
                     </div>

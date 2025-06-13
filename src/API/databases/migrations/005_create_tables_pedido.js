@@ -29,9 +29,9 @@ function criarTabelasPedido(){
             id_status INTEGER,
 
             FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-            FOREIGN KEY (id_restaurante) REFERENCES restaurante(id),
-            FOREIGN KEY (id_forma_pagamento) REFERENCES forma_pagamento(id),
-            FOREIGN KEY (id_status) REFERENCES status_pedido(id)
+            FOREIGN KEY (id_restaurante) REFERENCES restaurante(id) ON DELETE CASCADE,
+            FOREIGN KEY (id_forma_pagamento) REFERENCES forma_pagamento(id) ON DELETE CASCADE,
+            FOREIGN KEY (id_status) REFERENCES status_pedido(id) on DELETE CASCADE
             );
             `);
 

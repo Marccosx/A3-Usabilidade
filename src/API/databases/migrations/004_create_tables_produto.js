@@ -11,7 +11,8 @@ function criarTabelasProduto() {
                 ativo BOOLEAN,
                 id_restaurante INTEGER,
                 foto_produto TEXT,
-                FOREIGN KEY (id_restaurante) REFERENCES restaurante(id)
+                categoria TEXT,
+                FOREIGN KEY (id_restaurante) REFERENCES restaurante(id) ON DELETE CASCADE
             );
         `);
 

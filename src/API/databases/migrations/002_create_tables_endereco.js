@@ -19,7 +19,7 @@ function createTablesEndereco() {
             nome TEXT NOT NULL,
             id_estado INTEGER,
             
-            FOREIGN KEY (id_estado) REFERENCES estado(id)
+            FOREIGN KEY (id_estado) REFERENCES estado(id) 
             );
             `);
 
@@ -33,7 +33,7 @@ function createTablesEndereco() {
             complemento TEXT,
             id_cidade INTEGER,
             
-            FOREIGN KEY (id_cidade) REFERENCES cidade(id)
+            FOREIGN KEY (id_cidade) REFERENCES cidade(id) 
             );
             `);
     })

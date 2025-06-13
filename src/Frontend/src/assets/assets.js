@@ -86,36 +86,24 @@ export const assets = {
 
 export const menu_list = [
     {
-        menu_name: "Saladas",
-        menu_image: menu_1
+        menu_name: "Lanches",
+        menu_image: menu_1,
+        categoria: "Lanches"
     },
     {
-        menu_name: "Rolinhos",
-        menu_image: menu_2
+        menu_name: "Almoço",
+        menu_image: menu_2,
+        categoria: "Almoço"
     },
     {
-        menu_name: "Sobremesas",
-        menu_image: menu_3
+        menu_name: "Vegano",
+        menu_image: menu_3,
+        categoria: "Vegano"
     },
     {
-        menu_name: "Sanduíches",
-        menu_image: menu_4
-    },
-    {
-        menu_name: "Bolos",
-        menu_image: menu_5
-    },
-    {
-        menu_name: "Vegetariano",
-        menu_image: menu_6
-    },
-    {
-        menu_name: "Massas",
-        menu_image: menu_7
-    },
-    {
-        menu_name: "Macarrão",
-        menu_image: menu_8
+        menu_name: "Outros",
+        menu_image: menu_4,
+        categoria: "Outros"
     }
 ]
 

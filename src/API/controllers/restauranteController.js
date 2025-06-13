@@ -13,8 +13,6 @@ const restauranteController = {
             return res.status(400).json({ erro: 'Campo ativo é obrigatório.' });}
             if(aberto === undefined){
                 return res.status(400).json({ erro: 'Campo aberto é obrigatório.' });
-            }if(!foto ) {
-                return res.status(400).json({ erro: 'Campo foto é obrigatório.' });
             } if(!id_endereco) {
             return res.status(400).json({ erro: 'Campo id_endereco é obrigatório.' });
         }
@@ -36,7 +34,7 @@ const restauranteController = {
         const id = req.params.id;
         const { nome, taxaFrete, ativo, aberto, foto, id_endereco } = req.body;
 
-        if (!nome || taxaFrete === undefined || ativo === undefined  || aberto === undefined  ||  !foto || !id_endereco) {
+        if (!nome || taxaFrete === undefined || ativo === undefined  || aberto === undefined  ||  !id_endereco) {
             return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' });
         }
 

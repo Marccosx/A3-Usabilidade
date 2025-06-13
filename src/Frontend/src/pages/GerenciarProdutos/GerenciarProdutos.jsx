@@ -12,7 +12,8 @@ const GerenciarProdutos = () => {
         preco: 0,
         foto_produto: '',
         id_restaurante: id,
-        ativo: false
+        ativo: false,
+        categoria: ''
     });
     const [editando, setEditando] = useState(null);
     const [erro, setErro] = useState('');
@@ -60,7 +61,7 @@ const GerenciarProdutos = () => {
             }
 
             if (response.status === 200 || response.status === 201) {
-                
+
                 alert(editando ? 'Produto atualizado com sucesso!' : 'Produto adicionado com sucesso!');
                 setNovoProduto({
                     nome: '',
@@ -68,7 +69,8 @@ const GerenciarProdutos = () => {
                     preco: 0,
                     foto_produto: '',
                     id_restaurante: id,
-                    ativo: false
+                    ativo: false,
+                    categoria: ''
                 });
                 setEditando(null);
                 setPreviewImage(null);
@@ -76,7 +78,7 @@ const GerenciarProdutos = () => {
                 carregarProdutos();
             }
         } catch (error) {
-            
+
             console.error('Erro ao salvar produto:', error);
             setErro('Erro ao salvar produto: ' + (error.response?.data?.message || error.message));
         }
@@ -114,7 +116,8 @@ const GerenciarProdutos = () => {
             preco: produto.preco,
             foto_produto: produto.foto_produto,
             ativo: produto.ativo,
-            id_restaurante: id
+            id_restaurante: id,
+            categoria: produto.categoria || ''
         });
         setPreviewImage(preview);
         setEditando(produto.id);
@@ -126,13 +129,8 @@ const GerenciarProdutos = () => {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                const imagemJson = JSON.stringify({
-                    nome: file.name,
-                    caminho: reader.result, // base64
-                    tipo: file.type
-                });
                 setPreviewImage(reader.result);
-                setNovoProduto({ ...novoProduto, foto_produto: imagemJson });
+                setNovoProduto({ ...novoProduto, foto_produto: reader.result });
             };
             reader.readAsDataURL(file);
         }
@@ -232,6 +230,21 @@ const GerenciarProdutos = () => {
                                     required
                                 />
                             </div>
+                            <div className="form-group">
+                                <label htmlFor="categoria">Categoria</label>
+                                <select
+                                    id="categoria"
+                                    value={novoProduto.categoria}
+                                    onChange={(e) => setNovoProduto({ ...novoProduto, categoria: e.target.value })}
+                                    required
+                                >
+                                    <option value="">Selecione uma categoria</option>
+                                    <option value="Lanches">Lanches</option>
+                                    <option value="Almoço">Almoço</option>
+                                    <option value="Vegano">Vegano</option>
+                                    <option value="Outros">Outros</option>
+                                </select>
+                            </div>
                         </div>
                         <div className="form-actions">
                             <button type="submit" className="btn-submit">
@@ -248,7 +261,9 @@ const GerenciarProdutos = () => {
                                             descricao: '',
                                             preco: 0,
                                             imagem: '',
-                                            id_restaurante: id
+                                            id_restaurante: id,
+                                            categoria: '',
+                                            ativo: false,
                                         });
                                         setPreviewImage(null);
                                     }}
@@ -258,7 +273,7 @@ const GerenciarProdutos = () => {
                             )}
                         </div>
                     </div>
-                </form> 
+                </form>
 
                 <div className="produtos-table">
                     <table>
