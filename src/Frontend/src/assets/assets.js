@@ -87,22 +87,22 @@ export const assets = {
 export const menu_list = [
     {
         menu_name: "Lanches",
-        menu_image: menu_1,
+        menu_image: menu_4,
         categoria: "Lanches"
     },
     {
         menu_name: "Almoço",
-        menu_image: menu_2,
+        menu_image: menu_6,
         categoria: "Almoço"
     },
     {
         menu_name: "Vegano",
-        menu_image: menu_3,
+        menu_image: menu_1,
         categoria: "Vegano"
     },
     {
         menu_name: "Outros",
-        menu_image: menu_4,
+        menu_image: menu_7,
         categoria: "Outros"
     }
 ]

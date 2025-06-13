@@ -9,7 +9,7 @@ const Footer = () => {
     <footer id="footer">
       <div className="footer-content">
         <div className="footer-content-left">
-          <img src={assets.logo} alt="logo" />
+          <img src={assets.logo} alt="logo" style={{width: "100px"}}/>
           <p>
             Somos apaixonados por entregar felicidade através de pratos deliciosos.
             Nossa missão é proporcionar a melhor experiência gastronômica,

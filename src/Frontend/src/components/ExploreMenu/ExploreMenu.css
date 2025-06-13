@@ -56,6 +56,15 @@
   padding: 2px;
 }
 
+.explore-menu-list-item {
+  /* Adicionar hover mais intuitivo */
+  transition: transform 0.2s ease;
+}
+
+.explore-menu-list-item:hover {
+  transform: scale(1.05);
+}
+
 @media (max-width: 1050px) {
   .explore-menu-text {
     max-width: 100%;

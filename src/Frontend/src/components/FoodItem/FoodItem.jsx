@@ -6,6 +6,12 @@ import { StoreContext } from "../../context/StoreContext";
 const FoodItem = ({ id, name, price, description, image }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
+  const handleRemove = () => {
+    if (window.confirm('Deseja remover este item do carrinho?')) {
+        removeFromCart(id);
+    }
+  };
+
   return (
     <div className="food-item">
       <div className="food-item-img-container">
@@ -22,7 +28,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
             <img
               src={assets.remove_icon_red}
               alt="remove_icon_red"
-              onClick={() => removeFromCart(id)}
+              onClick={handleRemove}
             />
             <p>{cartItems[id]}</p>
             <img

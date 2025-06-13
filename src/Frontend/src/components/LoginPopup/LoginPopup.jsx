@@ -5,6 +5,7 @@ import { assets } from "../../assets/assets";
 const LoginPopup = ({ setShowLogin, setUserName }) => {
   const [currentState, setCurrentState] = useState("Login");
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -40,7 +41,7 @@ const LoginPopup = ({ setShowLogin, setUserName }) => {
         alert(data.message || "Erro ao autenticar");
       }
     } catch (err) {
-      alert("Erro de conexão");
+      setError('Erro ao fazer login. Verifique suas credenciais e tente novamente.');
     }
   };
 

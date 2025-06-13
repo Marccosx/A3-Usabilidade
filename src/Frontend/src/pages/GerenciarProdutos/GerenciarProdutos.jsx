@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './GerenciarProdutos.css';
 
 const GerenciarProdutos = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [produtos, setProdutos] = useState([]);
     const [novoProduto, setNovoProduto] = useState({
         nome: '',
@@ -136,9 +137,21 @@ const GerenciarProdutos = () => {
         }
     };
 
+    const handlePriceChange = (e) => {
+        const value = e.target.value;
+        if (value >= 0) {
+            setNovoProduto({ ...novoProduto, preco: value });
+        }
+    };
+
     return (
         <div className="produtos-container">
             <div className="content-wrapper">
+                <a className="btn-voltar" onClick={() => navigate(`/restaurante/${id}`)}><svg xmlns="http://www.w3.org/2000/svg" 
+                    width={24} 
+                    height={24} viewBox="0 0 24 24">
+                        <path fill="#f30707" d="M20 11H7.83l5.59-5.59L12 4l-8 8l8 8l1.41-1.41L7.83 13H20z"></path>
+                    </svg> voltar </a>
                 <h1 className="page-title">
                     Gerenciar Produtos
                     {restaurante && <span className="restaurante-nome">Restaurante: {restaurante.nome}</span>}
@@ -220,13 +233,7 @@ const GerenciarProdutos = () => {
                                     min="0"
                                     placeholder="Preço"
                                     value={novoProduto.preco === undefined || novoProduto.preco === null ? '' : novoProduto.preco}
-                                    onChange={(e) => {
-                                        const value = e.target.value;
-                                        setNovoProduto({
-                                            ...novoProduto,
-                                            preco: value === '' ? '' : parseFloat(value.replace(',', '.'))
-                                        });
-                                    }}
+                                    onChange={handlePriceChange}
                                     required
                                 />
                             </div>

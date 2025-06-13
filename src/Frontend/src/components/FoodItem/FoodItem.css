@@ -91,3 +91,26 @@
   font-weight: 500;
   margin-top: 10px;
 }
+
+.food-item {
+  /* Melhorar espaçamento e hierarquia visual */
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.food-item-info {
+  /* Melhorar legibilidade */
+  line-height: 1.5;
+}
+
+.food-item-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+@media (max-width: 480px) {
+  .food-item-img {
+      height: 150px;
+  }
+}

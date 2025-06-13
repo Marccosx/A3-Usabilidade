@@ -4,6 +4,36 @@
     margin: 0 auto;
 }
 
+.btn-voltar {
+    color: #f30707;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    background-color: rgba(255, 0, 0, 0.05);
+    border: 1px solid rgba(255, 0, 0, 0.1);
+}
+
+.btn-voltar:hover {
+    color: #630404;
+    background-color: rgba(255, 0, 0, 0.1);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(255, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-voltar svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+}
+
 .restaurante-header {
     margin-bottom: 30px;
     padding: 20px;
@@ -203,4 +233,155 @@
 
 .btn-gerenciar-produtos:hover {
     background-color: #15803d;
-} 
+}
+
+@media (max-width: 768px) {
+    .restaurante-detalhe {
+        padding: 10px;
+    }
+
+    .restaurante-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .header-content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .restaurante-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
+
+    .menu-item {
+        max-width: 100%;
+    }
+
+    .menu-item-img-container {
+        height: 180px;
+    }
+
+    .menu-section {
+        padding: 15px;
+    }
+
+    .menu-item-info {
+        padding: 12px;
+    }
+
+    .menu-item-name-rating {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .menu-item-name-rating h3 {
+        font-size: 1.1em;
+    }
+
+    .menu-item-desc {
+        font-size: 0.85em;
+    }
+
+    .menu-item-price {
+        font-size: 1em;
+    }
+
+    .btn-voltar {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+    
+    .btn-voltar svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .restaurante-detalhe {
+        padding: 5px;
+    }
+
+    .restaurante-header {
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+
+    .restaurante-header h1 {
+        font-size: 1.5em;
+    }
+
+    .menu-grid {
+        gap: 15px;
+    }
+
+    .menu-item-img-container {
+        height: 160px;
+    }
+
+    .food-item-counter {
+        padding: 3px 8px;
+    }
+
+    .food-item-counter img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .food-item-counter p {
+        font-size: 0.9em;
+    }
+
+    .btn-voltar {
+        font-size: 13px;
+        padding: 5px 8px;
+    }
+    
+    .btn-voltar svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.btn-gerenciar-produtos {
+    background-color: var(--primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-gerenciar-produtos svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .btn-gerenciar-produtos {
+        gap: 0px;
+    }
+}
+

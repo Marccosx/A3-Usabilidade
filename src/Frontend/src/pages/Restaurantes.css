@@ -258,6 +258,10 @@
     .restaurants-table table {
         min-width: 600px;
     }
+    
+    .form-group{
+        grid-column: 1 / -1 !important;
+    }
 }
 
 /* Agrupamento em grid para endereço */

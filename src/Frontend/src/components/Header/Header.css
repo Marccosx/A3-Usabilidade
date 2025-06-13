@@ -1,13 +1,14 @@
 header {
+  width: 100%;
   height: 34vw;
-  margin: 30px auto;
+  margin: 0;
   background: url("../../assets/header_img.png") no-repeat;
   background-size: cover;
   background-position: center;
   position: relative;
-  border-radius: 24px;
   padding: 0;
   overflow: hidden;
+  border-radius: 24px;
 }
 
 .header-contents {
@@ -20,6 +21,7 @@ header {
   bottom: 20%;
   left: 6vw;
   animation: fadeIn 3s;
+
 }
 
 .header-contents h2 {
@@ -53,11 +55,11 @@ header {
   background-color: #ffbd07;
   color: #ffffff;
 }
+
 @media (max-width: 768px) {
   header {
     height: auto;
     padding: 40px 20px;
-    border-radius: 16px;
   }
 
   .header-contents {
@@ -65,15 +67,16 @@ header {
     bottom: auto;
     left: auto;
     max-width: 100%;
+    padding: var(--spacing-md);
   }
 
   .header-contents h2 {
-    font-size: 28px;
+    font-size: 24px;
     margin: 0;
   }
 
   .header-contents h3 {
-    font-size: 16px;
+    font-size: 18px;
     margin-top: -6px;
   }
 
