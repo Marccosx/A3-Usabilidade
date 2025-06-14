@@ -31,14 +31,15 @@ const Restaurantes = () => {
     const [cidadeSelecionada, setCidadeSelecionada] = useState('');
     const [mensagem, setMensagem] = useState('');
 
+    
+    useEffect(() => {
+        carregarRestaurantes();
+    }, []);
+    
     useEffect(() => {
         axios.get('http://localhost:3000/estados')
             .then(res => setEstados(res.data))
             .catch(() => setEstados([]));
-    }, []);
-
-    useEffect(() => {
-        carregarRestaurantes();
     }, []);
 
     useEffect(() => {

@@ -54,6 +54,27 @@
   margin: 30px 0;
 }
 
+.cart-total-details {
+  display: flex;
+  justify-content: space-between;
+  color: var(--gray);
+  margin: 10px 0;
+}
+
+.cart-total-details p {
+  margin: 0;
+}
+
+.cart-total-details b {
+  color: var(--dark);
+}
+
+.cart-total hr {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #e2e2e2;
+}
+
 @media (max-width: 900px) {
   .place-order {
     gap: 50px;

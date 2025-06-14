@@ -5,9 +5,9 @@
 }
 
 .content-wrapper {
-    background-color: white;
-    padding: 20px;
+    background: white;
     border-radius: 8px;
+    padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -16,46 +16,39 @@
 }
 
 .btn-back {
-    background-color: #666;
-    color: white;
+    background: #f0f0f0;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 1em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background-color 0.2s;
+    font-size: 14px;
+    color: #333;
 }
 
 .btn-back:hover {
-    background-color: #555;
+    background: #e0e0e0;
 }
 
 .pedido-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 30px;
+    align-items: center;
+    margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #eee;
 }
 
 .pedido-header h1 {
-    font-size: 2em;
-    color: #333;
     margin: 0;
+    font-size: 24px;
+    color: #333;
 }
 
 .pedido-info {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    margin-bottom: 40px;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
+    margin-bottom: 30px;
 }
 
 .info-group {
@@ -65,19 +58,115 @@
 }
 
 .info-group label {
+    font-size: 14px;
     color: #666;
-    font-weight: 500;
 }
 
 .info-group span {
-    font-size: 1.1em;
+    font-size: 16px;
     color: #333;
 }
 
 .valor-total {
-    color: #4CAF50 !important;
     font-weight: bold;
-    font-size: 1.2em !important;
+    color: #28a745 !important;
+}
+
+.pedido-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.btn-cancel-order,
+.btn-edit-status,
+.btn-delete,
+.btn-save,
+.btn-cancel {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-cancel-order {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-cancel-order:hover {
+    background: #c82333;
+}
+
+.btn-edit-status {
+    background: #17a2b8;
+    color: white;
+}
+
+.btn-edit-status:hover {
+    background: #138496;
+}
+
+.btn-delete {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #5a6268;
+}
+
+.btn-save {
+    background: #28a745;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #218838;
+}
+
+.btn-cancel {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #5a6268;
+}
+
+.status-edit {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.status-select {
+    padding: 6px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #495057;
+    background-color: white;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 4px;
+    margin: 20px;
+    text-align: center;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
 }
 
 .itens-section {
@@ -182,49 +271,33 @@
 }
 
 .status-badge {
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: 4px;
+    font-size: 14px;
     font-weight: 500;
-    font-size: 0.9em;
 }
 
 .status-pending {
-    background-color: #FFF3E0;
-    color: #E65100;
+    background: #fff3cd;
+    color: #856404;
 }
 
 .status-preparing {
-    background-color: #E3F2FD;
-    color: #1565C0;
+    background: #cce5ff;
+    color: #004085;
 }
 
 .status-delivering {
-    background-color: #E8F5E9;
-    color: #2E7D32;
+    background: #d4edda;
+    color: #155724;
 }
 
 .status-delivered {
-    background-color: #E8F5E9;
-    color: #1B5E20;
+    background: #d1e7dd;
+    color: #0f5132;
 }
 
 .status-cancelled {
-    background-color: #FFEBEE;
-    color: #B71C1C;
-}
-
-.error-message {
-    background-color: #ffebee;
-    color: #c62828;
-    padding: 15px;
-    border-radius: 4px;
-    margin: 20px 0;
-    text-align: center;
-}
-
-.loading {
-    text-align: center;
-    padding: 40px;
-    font-size: 1.2em;
-    color: #666;
+    background: #f8d7da;
+    color: #721c24;
 } 

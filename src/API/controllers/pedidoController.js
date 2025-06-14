@@ -55,6 +55,32 @@ const pedidoController = {
         });
     },
 
+    listarPedidosPorUsuario: (req, res)=>{
+        const id_usuario = req.params.id_usuario;
+        if (!id_usuario) {
+            return res.status(400).json({ error: 'ID do usuário é obrigatório' });
+        }
+        pedidoModel.listarPedidosPorUsuario(id_usuario, (err, rows) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.status(200).json(rows);
+        });
+    },
+
+    listarPedidosPorId: (req, res)=>{
+        const id = req.params.id;
+        if (!id) {
+            return res.status(400).json({ error: 'ID do pedido é obrigatório' });
+        }
+        pedidoModel.listarPedidosPorId(id, (err, rows) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.status(200).json(rows);
+        });
+    },
+
     edit: (req, res)=>{
         const id = req.params.id;
         const pedido = req.body;
@@ -82,7 +108,7 @@ const pedidoController = {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-            res.status(200).json(result);
+            res.status(204).json(result);
         });
     },
 

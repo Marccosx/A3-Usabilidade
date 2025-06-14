@@ -32,9 +32,11 @@ const LoginPopup = ({ setShowLogin, setUserName }) => {
       if (response.ok) {
         const nome = data.usuario?.nome || data.usuario?.name || data.nome || data.name || "Usuário";
         const idGrupo = data.usuario?.id_grupo || data.id_grupo || 3;
+        const id = data.usuario?.id || data.id;
         setUserName(nome);
         localStorage.setItem("userName", nome);
         localStorage.setItem("idGrupo", idGrupo);
+        localStorage.setItem("id", id);
         alert("Sucesso!");
         setShowLogin(false);
       } else {

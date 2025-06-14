@@ -48,7 +48,16 @@ const UsuarioController = {
       if (err) return res.status(500).json({ erro: 'Erro ao listar usuários.', detalhe: err.message });
       res.status(200).json(usuarios);
     });
-  }
+  },
+  
+  buscarPorId: (req, res) => {
+    const { id } = req.params;
+    UsuarioModel.bucarPorId(id, (err, usuario) => {
+      if (err) return res.status(500).json({ erro: 'Erro ao buscar usuário.', detalhe: err.message });
+      res.status(200).json(usuario);
+    });
+  },
+
 };
 
 module.exports = UsuarioController;

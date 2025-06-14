@@ -23,8 +23,8 @@ const Pedidos = () => {
     const carregarPedidos = async () => {
         try {
             const response = await axios.get('http://localhost:3000/pedidos');
-            if (response.data.success) {
-                setPedidos(response.data.data);
+            if (response.status === 200) {
+                setPedidos(response.data);
                 setErro('');
             } else {
                 setErro('Erro ao carregar pedidos: ' + response.data.message);
@@ -40,9 +40,9 @@ const Pedidos = () => {
         try {
             let response;
             if (editando) {
-                response = await axios.put(`http://localhost:3000/pedidos/${editando}`, novoPedido);
+                response = await axios.put(`http://localhost:3000/pedidos/edit/${editando}`, novoPedido);
             } else {
-                response = await axios.post('http://localhost:3000/pedidos', novoPedido);
+                response = await axios.post('http://localhost:3000/pedidos/create', novoPedido);
             }
 
             if (response.data.success) {
@@ -68,8 +68,8 @@ const Pedidos = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Tem certeza que deseja excluir este pedido?')) {
             try {
-                const response = await axios.delete(`http://localhost:3000/pedidos/${id}`);
-                if (response.data.success) {
+                const response = await axios.delete(`http://localhost:3000/pedidos/delete/${id}`);
+                if (response.status === 204) {
                     carregarPedidos();
                     setErro('');
                 } else {
@@ -95,7 +95,7 @@ const Pedidos = () => {
     };
 
     const handleView = (id) => {
-        navigate(`/pedido/${id}`);
+        navigate(`/pedidos/${id}`);
     };
 
     const getStatusColor = (status) => {
@@ -135,7 +135,7 @@ const Pedidos = () => {
     return (
         <div className="pedidos-container">
             <div className="content-wrapper">
-                <h1 className="page-title">Gerenciar Pedidos</h1>
+                <h1 className="page-title">Todos os Pedidos</h1>
                 
                 {erro && (
                     <div className="error-message" role="alert">
@@ -143,130 +143,35 @@ const Pedidos = () => {
                     </div>
                 )}
                 
-                <form onSubmit={handleSubmit} className="pedido-form">
-                    <h2 className="form-title">
-                        {editando ? 'Editar Pedido' : 'Adicionar Novo Pedido'}
-                    </h2>
-                    <div className="form-grid">
-                        <div className="form-group">
-                            <label htmlFor="clienteNome">Nome do Cliente</label>
-                            <input
-                                id="clienteNome"
-                                type="text"
-                                placeholder="Nome do Cliente"
-                                value={novoPedido.clienteNome}
-                                onChange={(e) => setNovoPedido({...novoPedido, clienteNome: e.target.value})}
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="endereco">Endereço</label>
-                            <input
-                                id="endereco"
-                                type="text"
-                                placeholder="Endereço de Entrega"
-                                value={novoPedido.endereco}
-                                onChange={(e) => setNovoPedido({...novoPedido, endereco: e.target.value})}
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="status">Status</label>
-                            <select
-                                id="status"
-                                value={novoPedido.status}
-                                onChange={(e) => setNovoPedido({...novoPedido, status: e.target.value})}
-                                required
-                            >
-                                <option value="PENDENTE">Pendente</option>
-                                <option value="EM_PREPARO">Em Preparo</option>
-                                <option value="SAIU_PARA_ENTREGA">Saiu para Entrega</option>
-                                <option value="ENTREGUE">Entregue</option>
-                                <option value="CANCELADO">Cancelado</option>
-                            </select>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="valorTotal">Valor Total</label>
-                            <input
-                                id="valorTotal"
-                                type="number"
-                                step="0.01"
-                                placeholder="Valor Total"
-                                value={novoPedido.valorTotal}
-                                onChange={(e) => setNovoPedido({...novoPedido, valorTotal: parseFloat(e.target.value)})}
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div className="form-actions">
-                        <button
-                            type="submit"
-                            className="btn-primary"
-                        >
-                            {editando ? 'Atualizar' : 'Adicionar'}
-                        </button>
-                        {editando && (
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    setEditando(null);
-                                    setNovoPedido({
-                                        clienteNome: '',
-                                        endereco: '',
-                                        itens: [],
-                                        status: 'PENDENTE',
-                                        valorTotal: 0
-                                    });
-                                    setErro('');
-                                }}
-                                className="btn-secondary"
-                            >
-                                Cancelar
-                            </button>
-                        )}
-                    </div>
-                </form>
+                
 
                 <div className="pedidos-table">
                     <table>
                         <thead>
                             <tr>
                                 <th>Cliente</th>
-                                <th>Endereço</th>
                                 <th>Status</th>
                                 <th>Valor Total</th>
+                                <th>Forma de Pagamento</th>
+                                <th>Restaurante</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             {pedidos.map((pedido) => (
                                 <tr key={pedido.id}>
-                                    <td>{pedido.clienteNome}</td>
-                                    <td>{pedido.endereco}</td>
+                                    <td>{pedido.usuario_nome}</td>
                                     <td>
                                         <span className={`status-badge ${getStatusColor(pedido.status)}`}>
-                                            {formatStatus(pedido.status)}
+                                            {formatStatus(pedido.status_pedido_nome)}
                                         </span>
                                     </td>
                                     <td>R$ {pedido.valorTotal.toFixed(2)}</td>
-                                    <td className="actions">
-                                        <button
-                                            onClick={() => handleView(pedido.id)}
-                                            className="btn-view"
-                                        >
-                                            Visualizar
-                                        </button>
-                                        <button
-                                            onClick={() => handleEdit(pedido)}
-                                            className="btn-edit"
-                                        >
-                                            Editar
-                                        </button>
-                                        <button
-                                            onClick={() => handleDelete(pedido.id)}
-                                            className="btn-delete"
-                                        >
-                                            Excluir
+                                    <td>{pedido.forma_pagamento_nome}</td>
+                                    <td>{pedido.restaurante_nome}</td>
+                                    <td>
+                                        <button onClick={() => handleView(pedido.id)} className="btn-view">
+                                            Ver Detalhes
                                         </button>
                                     </td>
                                 </tr>

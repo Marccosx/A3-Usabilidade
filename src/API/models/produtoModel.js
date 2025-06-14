@@ -74,7 +74,8 @@ const produtoModel = {
     list: (callback) => {
         db.all(
             `SELECT produto.id, produto.nome, produto.preco, produto.descricao, 
-                produto.ativo, produto.foto_produto, produto.categoria, restaurante.nome AS restaurante_nome 
+                produto.ativo, produto.foto_produto, produto.categoria, 
+                produto.id_restaurante, restaurante.nome AS restaurante_nome 
          FROM produto 
          JOIN restaurante ON produto.id_restaurante = restaurante.id`,
             [],

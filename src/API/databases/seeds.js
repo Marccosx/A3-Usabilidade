@@ -328,6 +328,27 @@ grupos_permissoes.forEach(grupo_permissao => {
       console.error('Erro ao inserir usuário admin:', err.message);
     }
   });
+  db.run(`INSERT INTO usuario (id, nome, email, senha, id_grupo) VALUES (2, 'Cliente 1', 'cliente1@email.com', 'cliente123', 3)`, (err) => {
+    if (err) {
+      console.error('Erro ao inserir usuário admin:', err.message);
+    }
+  });
+  db.run(`INSERT INTO usuario (id, nome, email, senha, id_grupo) VALUES (3, 'Cliente 2', 'cliente2@email.com', 'cliente123', 3)`, (err) => {
+    if (err) {
+      console.error('Erro ao inserir usuário admin:', err.message);
+    }
+  });
+  db.run(`INSERT INTO usuario (id, nome, email, senha, id_grupo) VALUES (4, 'Dono Restaurante', 'dono1@email.com', 'dono123', 2)`, (err) => {
+    if (err) {
+      console.error('Erro ao inserir usuário admin:', err.message);
+    }
+  });
+  db.run(`INSERT INTO usuario (id, nome, email, senha, id_grupo) VALUES (5, 'Dono Restaurante', 'dono2@email.com', 'dono123', 2)`, (err) => {
+    if (err) {
+      console.error('Erro ao inserir usuário admin:', err.message);
+    }
+  });
+  
   
 console.log('Dados inseridos ao banco com sucesso!');
 });

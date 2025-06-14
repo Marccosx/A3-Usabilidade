@@ -45,6 +45,46 @@ const pedidoModel = {
         });
     },
 
+    listarPedidosPorId: (id, callback) => {
+        db.all(`
+            SELECT 
+                pedido.*,
+                usuario.nome AS usuario_nome,
+                restaurante.nome AS restaurante_nome,
+                forma_pagamento.descricao AS forma_pagamento_nome,
+                status_pedido.nome AS status_pedido_nome,
+                GROUP_CONCAT(
+                    json_object(
+                        'id', item_pedido.id,
+                        'id_produto', item_pedido.id_produto,
+                        'quantidade', item_pedido.quantidade,
+                        'precoUnitario', item_pedido.precoUnitario,
+                        'precoTotal', item_pedido.precoTotal,
+                        'observacao', item_pedido.obeservacao
+                    )
+                ) as itens
+            FROM pedido 
+            JOIN usuario ON pedido.id_usuario = usuario.id 
+            JOIN restaurante ON pedido.id_restaurante = restaurante.id 
+            JOIN forma_pagamento ON pedido.id_forma_pagamento = forma_pagamento.id 
+            JOIN status_pedido ON pedido.id_status = status_pedido.id
+            LEFT JOIN item_pedido ON pedido.id = item_pedido.id_pedido
+            WHERE pedido.id = ?
+            GROUP BY pedido.id`, [id], (err, rows) => {
+            if (err) return callback(err);
+            // Processar os itens do pedido
+            rows = rows.map(row => {
+                if (row.itens) {
+                    row.itens = JSON.parse('[' + row.itens + ']');
+                } else {
+                    row.itens = [];
+                }
+                return row;
+            });
+            callback(null, rows);
+        });
+    },
+
     edit: (id, pedido, callback) => {
         const { codigo, subtotal, taxaFrete, valorTotal, dataEntrega, dataCancelamento, id_usuario, id_restaurante, id_forma_pagamento, id_status } = pedido;
 

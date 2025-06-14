@@ -15,7 +15,13 @@ const FoodItem = ({ id, name, price, description, image }) => {
   return (
     <div className="food-item">
       <div className="food-item-img-container">
-        <img src={image}  className="food-item-img" />
+        <img 
+          src={image}  
+          className="food-item-img"
+          onError={(e) => {
+            e.target.src = assets.default_food;
+          }}
+        />
         {!cartItems[id] ? (
           <img
             src={assets.add_icon_white}

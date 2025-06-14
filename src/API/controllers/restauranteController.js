@@ -79,7 +79,7 @@ const restauranteController = {
         const id = req.params.id;
 
         if(!id) {
-            return res.status(404).json({erro:'Insira o id do restaurante.',});
+            return res.status(404).json({erro:'Insira o id do restaurante.'});
         }
 
         restauranteModel.buscarRestaurantePorId(id, (err, restaurante)=>{
@@ -87,11 +87,10 @@ const restauranteController = {
                 return res.status(500).json({erro:'Erro ao buscar restaurante', detalhe: err.message});
             }
             if(!restaurante){
-                return res.status(404).json({erro: 'Restaurante não encontrado', detalhe: err.message});
+                return res.status(404).json({erro: 'Restaurante não encontrado'});
             }
             res.status(200).json(restaurante);
         })
-
     },
 
     listarAvaliacaoes: (req, res)=>{

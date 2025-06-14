@@ -13,6 +13,9 @@ const PedidoDetalhe = () => {
         preco: 0
     });
     const [erro, setErro] = useState('');
+    const [idGrupo, setIdGrupo] = useState(localStorage.getItem('idGrupo'));
+    const [editando, setEditando] = useState(false);
+    const [novoStatus, setNovoStatus] = useState('');
 
     useEffect(() => {
         carregarPedido();
@@ -21,11 +24,28 @@ const PedidoDetalhe = () => {
     const carregarPedido = async () => {
         try {
             const response = await axios.get(`http://localhost:3000/pedidos/${id}`);
-            if (response.data.success) {
-                setPedido(response.data.data);
+            if (response.status === 200 && response.data.length > 0) {
+                // Converter valores numéricos
+                const pedidoData = response.data[0];
+                pedidoData.subtotal = parseFloat(pedidoData.subtotal) || 0;
+                pedidoData.taxaFrete = parseFloat(pedidoData.taxaFrete) || 0;
+                pedidoData.valorTotal = parseFloat(pedidoData.valorTotal) || 0;
+                
+                // Converter valores numéricos dos itens
+                if (pedidoData.itens) {
+                    pedidoData.itens = pedidoData.itens.map(item => ({
+                        ...item,
+                        precoUnitario: parseFloat(item.precoUnitario) || 0,
+                        precoTotal: parseFloat(item.precoTotal) || 0,
+                        quantidade: parseInt(item.quantidade) || 0
+                    }));
+                }
+                
+                setPedido(pedidoData);
+                setNovoStatus(pedidoData.status_pedido_nome);
                 setErro('');
             } else {
-                setErro('Erro ao carregar pedido: ' + response.data.message);
+                setErro('Pedido não encontrado');
             }
         } catch (error) {
             console.error('Erro ao carregar pedido:', error);
@@ -41,13 +61,13 @@ const PedidoDetalhe = () => {
         const novoValorTotal = novosItens.reduce((total, item) => total + (item.preco * item.quantidade), 0);
 
         try {
-            const response = await axios.put(`http://localhost:3000/pedidos/${id}`, {
+            const response = await axios.put(`http://localhost:3000/pedidos/edit/${id}`, {
                 ...pedido,
                 itens: novosItens,
                 valorTotal: novoValorTotal
             });
 
-            if (response.data.success) {
+            if (response.status === 200) {
                 setPedido(response.data.data);
                 setNovoItem({
                     nome: '',
@@ -71,13 +91,13 @@ const PedidoDetalhe = () => {
         const novoValorTotal = novosItens.reduce((total, item) => total + (item.preco * item.quantidade), 0);
 
         try {
-            const response = await axios.put(`http://localhost:3000/pedidos/${id}`, {
+            const response = await axios.put(`http://localhost:3000/pedidos/edit/${id}`, {
                 ...pedido,
                 itens: novosItens,
                 valorTotal: novoValorTotal
             });
 
-            if (response.data.success) {
+            if (response.status === 200) {
                 setPedido(response.data.data);
                 setErro('');
             } else {
@@ -86,6 +106,77 @@ const PedidoDetalhe = () => {
         } catch (error) {
             console.error('Erro ao remover item:', error);
             setErro('Erro ao remover item: ' + (error.response?.data?.message || error.message));
+        }
+    };
+
+    const handleCancelarPedido = async () => {
+        if (window.confirm('Tem certeza que deseja cancelar este pedido?')) {
+            try {
+                const pedidoAtualizado = {
+                    codigo: pedido.codigo,
+                    subtotal: pedido.subtotal,
+                    taxaFrete: pedido.taxaFrete,
+                    valorTotal: pedido.valorTotal,
+                    dataEntrega: pedido.dataEntrega,
+                    dataCancelamento: new Date().toISOString(),
+                    id_usuario: pedido.id_usuario,
+                    id_restaurante: pedido.id_restaurante,
+                    id_forma_pagamento: pedido.id_forma_pagamento,
+                    id_status: 3 // 3: CANCELADO (conforme definido no seeds.js)
+                };
+
+                const response = await axios.put(`http://localhost:3000/pedidos/edit/${id}`, pedidoAtualizado);
+
+                if (response.status === 200) {
+                    alert('Pedido cancelado com sucesso!');
+                    carregarPedido();
+                } else {
+                    setErro('Erro ao cancelar pedido: ' + response.data.message);
+                }
+            } catch (error) {
+                console.error('Erro ao cancelar pedido:', error);
+                setErro('Erro ao cancelar pedido: ' + (error.response?.data?.message || error.message));
+            }
+        }
+    };
+
+    const handleExcluirPedido = async () => {
+        if (window.confirm('Tem certeza que deseja excluir este pedido?')) {
+            try {
+                const response = await axios.delete(`http://localhost:3000/pedidos/delete/${id}`);
+                if (response.status === 204) {
+                    alert('Pedido excluído com sucesso!');
+                    navigate('/pedidos');
+                } else {
+                    setErro('Erro ao excluir pedido: ' + response.data.message);
+                }
+            } catch (error) {
+                console.error('Erro ao excluir pedido:', error);
+                setErro('Erro ao excluir pedido: ' + (error.response?.data?.message || error.message));
+            }
+        }
+    };
+
+    const handleEditarStatus = async () => {
+        try {
+            const response = await axios.put(`http://localhost:3000/pedidos/edit/${id}`, {
+                ...pedido,
+                id_status: novoStatus === 'PENDENTE' ? 1 : 
+                          novoStatus === 'EM_PREPARO' ? 2 :
+                          novoStatus === 'SAIU_PARA_ENTREGA' ? 3 :
+                          novoStatus === 'ENTREGUE' ? 4 : 5
+            });
+
+            if (response.status === 200) {
+                alert('Status do pedido atualizado com sucesso!');
+                setEditando(false);
+                carregarPedido();
+            } else {
+                setErro('Erro ao atualizar status: ' + response.data.message);
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar status:', error);
+            setErro('Erro ao atualizar status: ' + (error.response?.data?.message || error.message));
         }
     };
 
@@ -123,6 +214,10 @@ const PedidoDetalhe = () => {
         }
     };
 
+    const formatCurrency = (value) => {
+        return typeof value === 'number' ? value.toFixed(2) : '0.00';
+    };
+
     if (erro) {
         return (
             <div className="error-message" role="alert">
@@ -146,97 +241,81 @@ const PedidoDetalhe = () => {
 
                 <div className="pedido-header">
                     <h1>Detalhes do Pedido #{pedido.id}</h1>
-                    <span className={`status-badge ${getStatusColor(pedido.status)}`}>
-                        {formatStatus(pedido.status)}
-                    </span>
+                    {editando ? (
+                        <div className="status-edit">
+                            <select 
+                                value={novoStatus} 
+                                onChange={(e) => setNovoStatus(e.target.value)}
+                                className="status-select"
+                            >
+                                <option value="PENDENTE">Pendente</option>
+                                <option value="EM_PREPARO">Em Preparo</option>
+                                <option value="SAIU_PARA_ENTREGA">Saiu para Entrega</option>
+                                <option value="ENTREGUE">Entregue</option>
+                                <option value="CANCELADO">Cancelado</option>
+                            </select>
+                            <button onClick={handleEditarStatus} className="btn-save">Salvar</button>
+                            <button onClick={() => setEditando(false)} className="btn-cancel">Cancelar</button>
+                        </div>
+                    ) : (
+                        <span className={`status-badge ${getStatusColor(pedido.status_pedido_nome)}`}>
+                            {formatStatus(pedido.status_pedido_nome)}
+                        </span>
+                    )}
                 </div>
 
                 <div className="pedido-info">
                     <div className="info-group">
                         <label>Cliente:</label>
-                        <span>{pedido.clienteNome}</span>
+                        <span>{pedido.usuario_nome}</span>
                     </div>
                     <div className="info-group">
-                        <label>Endereço:</label>
-                        <span>{pedido.endereco}</span>
+                        <label>Restaurante:</label>
+                        <span>{pedido.restaurante_nome}</span>
+                    </div>
+                    <div className="info-group">
+                        <label>Forma de Pagamento:</label>
+                        <span>{pedido.forma_pagamento_nome}</span>
+                    </div>
+                    <div className="info-group">
+                        <label>Subtotal:</label>
+                        <span>R$ {formatCurrency(pedido.subtotal)}</span>
+                    </div>
+                    <div className="info-group">
+                        <label>Taxa de Entrega:</label>
+                        <span>R$ {formatCurrency(pedido.taxaFrete)}</span>
                     </div>
                     <div className="info-group">
                         <label>Valor Total:</label>
-                        <span className="valor-total">R$ {pedido.valorTotal.toFixed(2)}</span>
+                        <span className="valor-total">R$ {formatCurrency(pedido.valorTotal)}</span>
                     </div>
                 </div>
 
-                <div className="itens-section">
-                    <h2>Itens do Pedido</h2>
+                <div className="pedido-actions">
+                    {idGrupo === '3' && 
+                     pedido.status_pedido_nome !== 'CANCELADO' && 
+                     pedido.status_pedido_nome !== 'ENTREGUE' && (
+                        <button onClick={handleCancelarPedido} className="btn-cancel-order">
+                            Cancelar Pedido
+                        </button>
+                    )}
                     
-                    <form onSubmit={handleAddItem} className="add-item-form">
-                        <div className="form-row">
-                            <div className="form-group">
-                                <label htmlFor="nome">Item</label>
-                                <input
-                                    id="nome"
-                                    type="text"
-                                    value={novoItem.nome}
-                                    onChange={(e) => setNovoItem({...novoItem, nome: e.target.value})}
-                                    placeholder="Nome do item"
-                                    required
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="quantidade">Quantidade</label>
-                                <input
-                                    id="quantidade"
-                                    type="number"
-                                    min="1"
-                                    value={novoItem.quantidade}
-                                    onChange={(e) => setNovoItem({...novoItem, quantidade: parseInt(e.target.value)})}
-                                    required
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="preco">Preço Unitário</label>
-                                <input
-                                    id="preco"
-                                    type="number"
-                                    step="0.01"
-                                    value={novoItem.preco}
-                                    onChange={(e) => setNovoItem({...novoItem, preco: parseFloat(e.target.value)})}
-                                    required
-                                />
-                            </div>
-                            <button type="submit" className="btn-add">Adicionar Item</button>
-                        </div>
-                    </form>
-
-                    <table className="itens-table">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Quantidade</th>
-                                <th>Preço Unitário</th>
-                                <th>Subtotal</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pedido.itens.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.nome}</td>
-                                    <td>{item.quantidade}</td>
-                                    <td>R$ {item.preco.toFixed(2)}</td>
-                                    <td>R$ {(item.quantidade * item.preco).toFixed(2)}</td>
-                                    <td>
-                                        <button
-                                            onClick={() => handleRemoveItem(index)}
-                                            className="btn-remove"
-                                        >
-                                            Remover
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {(idGrupo === '1' || idGrupo === '2') && (
+                        <>
+                            {pedido.status_pedido_nome !== 'CANCELADO' && 
+                             pedido.status_pedido_nome !== 'ENTREGUE' && (
+                                <button onClick={handleCancelarPedido} className="btn-cancel-order">
+                                    Cancelar Pedido
+                                </button>
+                            )}
+                            <button onClick={() => setEditando(true)} className="btn-edit-status">
+                                Editar Status
+                            </button>
+                            <button onClick={handleExcluirPedido} className="btn-delete">
+                                Excluir Pedido
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

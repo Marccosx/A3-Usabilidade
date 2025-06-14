@@ -22,6 +22,10 @@ const UsuarioModel = {
             callback(null, { changes: this.changes });
         });
     },
+
+    bucarPorId: (id, callback) => {
+        db.get(`SELECT * FROM usuario WHERE id = ?`, [id], callback);
+    },
 }
 
 module.exports = UsuarioModel;
