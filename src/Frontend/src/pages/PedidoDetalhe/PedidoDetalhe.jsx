@@ -163,8 +163,9 @@ const PedidoDetalhe = () => {
                 ...pedido,
                 id_status: novoStatus === 'PENDENTE' ? 1 : 
                           novoStatus === 'EM_PREPARO' ? 2 :
-                          novoStatus === 'SAIU_PARA_ENTREGA' ? 3 :
-                          novoStatus === 'ENTREGUE' ? 4 : 5
+                          novoStatus === 'CANCELADO' ? 3 :
+                          novoStatus === 'SAIU_PARA_ENTREGA' ? 4 :
+                          novoStatus === 'ENTREGUE' ?  5 : 0
             });
 
             if (response.status === 200) {
