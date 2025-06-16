@@ -20,6 +20,7 @@ const Pedidos = () => {
     // Função para carregar os dados do usuário
     const carregarDadosUsuario = () => {
         const nomeUsuario = localStorage.getItem('userName');
+        const idGrupo = localStorage.getItem('idGrupo');
         if (!nomeUsuario) {
             setErro('Você precisa estar logado para ver seus pedidos');
             setUsuarioLogado(null);
@@ -27,7 +28,7 @@ const Pedidos = () => {
             return;
         }
         setUsuarioLogado(nomeUsuario);
-        carregarPedidos(nomeUsuario);
+        carregarPedidos(nomeUsuario, idGrupo);
     };
 
     // Listener para mudanças no localStorage
@@ -48,16 +49,19 @@ const Pedidos = () => {
         };
     }, []);
 
-    const carregarPedidos = async (nomeUsuario) => {
+    const carregarPedidos = async (nomeUsuario, idGrupo) => {
         try {
             const response = await axios.get('http://localhost:3000/pedidos');
-            
             if (response.status === 200) {
-                // Filtrar apenas os pedidos do usuário logado
-                const pedidosUsuario = response.data.filter(pedido => {
-                    return pedido.usuario_nome === nomeUsuario;
-                });
-                setPedidos(pedidosUsuario);
+                let pedidosFiltrados;
+                if (idGrupo === '3') {
+                    // Grupo 3 vê apenas seus próprios pedidos
+                    pedidosFiltrados = response.data.filter(pedido => pedido.usuario_nome === nomeUsuario);
+                } else {
+                    // Outros grupos veem todos os pedidos
+                    pedidosFiltrados = response.data;
+                }
+                setPedidos(pedidosFiltrados);
                 setErro('');
             } else {
                 setErro('Erro ao carregar pedidos: ' + response.data.message);
