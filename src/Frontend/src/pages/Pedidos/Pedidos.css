@@ -77,7 +77,7 @@
 }
 
 .btn-primary {
-    background-color: #4CAF50;
+    background-color: #cc0000;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -149,12 +149,12 @@ tr:hover {
 }
 
 .btn-view {
-    background-color: #2196F3;
+    background-color: #cc0000;
     color: white;
 }
 
 .btn-view:hover {
-    background-color: #1976D2;
+    background-color: #740303;
 }
 
 .btn-edit {

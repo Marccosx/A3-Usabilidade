@@ -30,6 +30,7 @@ const Restaurantes = () => {
     const [cidades, setCidades] = useState([]);
     const [cidadeSelecionada, setCidadeSelecionada] = useState('');
     const [mensagem, setMensagem] = useState('');
+    const [restauranteParaExcluir, setRestauranteParaExcluir] = useState(null);
 
     
     useEffect(() => {
@@ -100,10 +101,10 @@ const Restaurantes = () => {
             let response;
             if (editando) {
                 response = await axios.put(`http://localhost:3000/restaurantes/edit/${editando}`, restauranteData);
-                setMensagem('Restaurante atualizado com sucesso!');
+                setMensagem(`✅ Restaurante "${novoRestaurante.nome}" atualizado com sucesso!`);
             } else {
                 response = await axios.post('http://localhost:3000/restaurantes/create/', restauranteData);
-                setMensagem('Restaurante cadastrado com sucesso!');
+                setMensagem(`🎉 Parabéns! O restaurante "${novoRestaurante.nome}" foi cadastrado com sucesso!`);
             }
 
             carregarRestaurantes();
@@ -127,28 +128,58 @@ const Restaurantes = () => {
             setPreviewImage(null);
             setEditando(null);
             setErro('');
+
+            // Scroll para o topo da página
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         } catch (error) {
-            setErro('Erro ao salvar restaurante: ' + (error.response?.data?.message || error.message));
-            // Log do erro detalhado
             console.error('Erro detalhado:', error);
+            
+            if (error.response?.status === 400) {
+                // Verifica se é um erro de validação de campos
+                if (error.response.data?.message?.includes('campo')) {
+                    setErro('❌ Por favor, preencha todos os campos obrigatórios.');
+                } 
+                // Verifica se é um erro de restaurante já existente
+                else if (error.response.data?.message?.toLowerCase().includes('já existe') || 
+                         error.response.data?.message?.toLowerCase().includes('já cadastrado')) {
+                    setErro('⚠️ Este restaurante já está cadastrado no sistema. Por favor, escolha outro nome.');
+                }
+                // Outros erros 400
+                else {
+                    setErro('❌ Erro ao salvar restaurante. Verifique se todos os campos foram preenchidos corretamente.');
+                }
+            } else {
+                setErro('❌ Erro ao salvar restaurante. Por favor, tente novamente.');
+            }
+
+            // Scroll para o topo da página mesmo em caso de erro
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
     };
 
-    const handleDelete = async (id) => {
-        if (window.confirm('Tem certeza que deseja excluir este restaurante?')) {
-            try {
-                const response = await axios.delete(`http://localhost:3000/restaurantes/delete/${id}`);
-                if (response.status === 200) {
-                    carregarRestaurantes();
-                    setErro('');
-                } else {
-                    setErro('Erro ao deletar restaurante: ' + response.data.message);
-                }
-            } catch (error) {
-                console.error('Erro ao deletar restaurante:', error);
-                setErro('Erro ao deletar restaurante: ' + (error.response?.data?.message || error.message));
-            }
+    const handleDelete = (id) => {
+        setRestauranteParaExcluir(id);
+    };
+
+    const confirmarExclusao = async () => {
+        try {
+            await axios.delete(`http://localhost:3000/restaurantes/delete/${restauranteParaExcluir}`);
+            setMensagem('✅ Restaurante excluído com sucesso!');
+            carregarRestaurantes();
+        } catch (error) {
+            setErro('❌ Erro ao excluir restaurante. Por favor, tente novamente.');
         }
+        setRestauranteParaExcluir(null);
+    };
+
+    const cancelarExclusao = () => {
+        setRestauranteParaExcluir(null);
     };
 
     const handleEdit = async (restaurante) => {
@@ -185,6 +216,11 @@ const Restaurantes = () => {
             setErro('Erro ao carregar endereço do restaurante.');
             console.error(error);
         }
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     };
 
     const handleView = (id) => {
@@ -212,20 +248,92 @@ const Restaurantes = () => {
 
     return (
         <div className="restaurantes-container">
-            <div className="content-wrapper">
-                <h1 className="page-title">Gerenciar Restaurantes</h1>
+            <h1>Gerenciamento de Restaurantes</h1>
+            
+            {mensagem && (
+                <div className="mensagem" style={{ backgroundColor: '#4CAF50', borderRadius: '6px'}}>
+                    <p style={{ color: 'white' }}>{mensagem}</p>
+                    <button 
+                        onClick={() => setMensagem('')}
+                        style={{
+                            marginTop: '15px',
+                            padding: '8px 20px',
+                            backgroundColor: 'white',
+                            color: '#4CAF50',
+                            border: 'none',
+                            borderRadius: '24px',
+                            cursor: 'pointer',
+                            fontSize: '14px',
+                            fontWeight: 'bold'
 
-                {erro && (
-                    <div className="error-message" role="alert">
-                        <span>{erro}</span>
-                    </div>
-                )}
-                {mensagem && (
-                    <div className="success-message" role="alert">
-                        <span>{mensagem}</span>
-                    </div>
-                )}
+                        }}
+                    >
+                        OK
+                    </button>
+                </div>
+            )}
 
+            {erro && (
+                <div className="mensagem" style={{ backgroundColor: '#d32f2f' }}>
+                    <p style={{ color: 'white' }}>{erro}</p>
+                    <button 
+                        onClick={() => setErro('')}
+                        style={{
+                            marginTop: '15px',
+                            padding: '8px 20px',
+                            backgroundColor: 'white',
+                            color: '#d32f2f',
+                            border: 'none',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            fontSize: '14px',
+                            fontWeight: 'bold'
+                        }}
+                    >
+                        OK
+                    </button>
+                </div>
+            )}
+
+            {restauranteParaExcluir && (
+                <div className="mensagem" style={{ backgroundColor: '#d32f2f' }}>
+                    <p style={{ color: 'white', marginBottom: '20px' }}>⚠️ Tem certeza que deseja excluir este restaurante?</p>
+                    <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                        <button 
+                            onClick={confirmarExclusao}
+                            style={{
+                                padding: '8px 20px',
+                                backgroundColor: 'white',
+                                color: '#d32f2f',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                fontSize: '14px',
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            Sim, Excluir
+                        </button>
+                        <button 
+                            onClick={cancelarExclusao}
+                            style={{
+                                padding: '8px 20px',
+                                backgroundColor: '#757575',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                fontSize: '14px',
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            <div className="form-container">
                 <form onSubmit={handleSubmit} className="restaurant-form">
 
                     {/* Bloco Restaurante */}
@@ -426,7 +534,7 @@ const Restaurantes = () => {
                                     setCidadeSelecionada('');
                                     setEstadoSelecionado('');
                                 }}
-                                className="btn-secondary"
+                                className="btn-delete"
                             >
                                 Cancelar
                             </button>

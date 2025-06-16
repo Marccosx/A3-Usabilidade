@@ -93,6 +93,24 @@ const restauranteController = {
         })
     },
 
+    listarRestauranteporNome:(req, res)=>{
+        const nome = req.params.nome;
+
+        if(!nome) {
+            return res.status(404).json({erro:'Insira o id do restaurante.'});
+        }
+
+        restauranteModel.buscarRestaurantePorNome(nome, (err, restaurante)=>{
+            if(err){
+                return res.status(500).json({erro:'Erro ao buscar restaurante', detalhe: err.message});
+            }
+            if(!restaurante){
+                return res.status(404).json({erro: 'Restaurante não encontrado'});
+            }
+            res.status(200).json(restaurante);
+        })
+    },
+
     listarAvaliacaoes: (req, res)=>{
         const id_restaurante = req.params.id_restaurante;
 

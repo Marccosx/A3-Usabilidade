@@ -8,5 +8,6 @@ router.put('/edit/:id', RestauranteController.edit);
 router.delete('/delete/:id', RestauranteController.delete);
 router.get('/:id', RestauranteController.listarRestauranteporID);
 router.get('/usuario/:id_usuario', RestauranteController.listarRestauranteporUsuario);
+router.get('/check-name/:nome', RestauranteController.listarRestauranteporNome);
 
 module.exports = router;

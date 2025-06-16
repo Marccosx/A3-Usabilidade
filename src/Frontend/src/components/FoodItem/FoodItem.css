@@ -37,6 +37,13 @@
   cursor: pointer;
   border-radius: 50%;
   box-shadow: 0px 0px 4px #00000020;
+  background-color: white;
+  padding: 5px;
+  transition: transform 0.2s ease;
+}
+
+.food-item-img-container .add:hover {
+  transform: scale(1.1);
 }
 
 .food-item-counter {
@@ -112,5 +119,33 @@
 @media (max-width: 480px) {
   .food-item-img {
       height: 150px;
+  }
+}
+
+.add-confirmation {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease-out;
+  z-index: 1000;
+}
+
+.remove-confirmation {
+  background-color: #f44336;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
 }

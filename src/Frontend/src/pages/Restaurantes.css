@@ -25,6 +25,21 @@
     padding: 1rem;
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: shake 0.5s ease-in-out;
+}
+
+.error-message::before {
+    content: "⚠️";
+    font-size: 1.2rem;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
 }
 
 .restaurant-form {
@@ -425,4 +440,43 @@ input:checked + .toggle-slider:before {
     color: #b91c1c;
     margin-bottom: 1rem;
     letter-spacing: 0.5px;
+}
+
+.mensagem {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+    min-width: 300px;
+    max-width: 80%;
+    animation: fadeIn 0.3s ease-in-out;
+    border: 1px solid #e0e0e0;
+}
+
+.mensagem::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }
