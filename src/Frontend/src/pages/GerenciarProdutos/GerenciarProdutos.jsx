@@ -123,6 +123,10 @@ const GerenciarProdutos = () => {
         setPreviewImage(preview);
         setEditando(produto.id);
         setErro('');
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     };
 
     const handleImageChange = (e) => {
@@ -327,7 +331,7 @@ const GerenciarProdutos = () => {
                                         <td className="actions">
                                             <button
                                                 onClick={() => handleEdit(produto)}
-                                                className="btn-edit"
+                                                className="btn-primary"
                                             >
                                                 Editar
                                             </button>

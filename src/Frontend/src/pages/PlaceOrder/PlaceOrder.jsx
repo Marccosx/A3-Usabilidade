@@ -40,14 +40,12 @@ const PlaceOrder = () => {
     const fetchUsuario = async () => {
       const id = localStorage.getItem("id");
       if (!id) {
-        console.log("ID não encontrado no localStorage");
         return;
       }
       try {
         const response = await axios.get(`http://localhost:3000/usuarios/${id}`);
         setUsuario(response.data);
       } catch (error) {
-        console.error("Erro ao buscar usuário:", error);
       }
     };
     fetchUsuario();
@@ -63,7 +61,6 @@ const PlaceOrder = () => {
           setRestaurant(restauranteResponse.data);
         }
       } catch (error) {
-        console.error("Erro ao buscar restaurante:", error);
       }
     };
     fetchRestaurant();
@@ -99,7 +96,6 @@ const PlaceOrder = () => {
         const response = await axios.get("http://localhost:3000/produtos/");
         setProducts(response.data);
       } catch (error) {
-        console.error("Erro ao carregar os produtos:", error);
       }
     };
     fetchProducts();
@@ -164,7 +160,6 @@ const PlaceOrder = () => {
         alert('Erro ao realizar pedido: ' + response.data.message);
       }
     } catch (error) {
-      console.error('Erro ao criar pedido:', error);
       alert('Erro ao realizar pedido: ' + (error.response?.data?.message || error.message));
     }
   };

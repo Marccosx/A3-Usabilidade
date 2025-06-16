@@ -61,12 +61,10 @@ const Restaurantes = () => {
                 setRestaurantes(response.data);
                 setErro('');
             } else {
-                console.log('Usando dados de exemplo devido a erro na API', response);
                 // Mantém os dados de exemplo
             }
         } catch (error) {
-            console.error('Erro ao carregar restaurantes:', error);
-            console.log('Usando dados de exemplo devido a erro na API');
+            
             // Mantém os dados de exemplo
         }
     };
@@ -74,12 +72,8 @@ const Restaurantes = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Log dos dados do endereço
-            console.log('Enviando para /enderecos/create:', {
-                ...endereco,
-                id_cidade: cidadeSelecionada
-            });
 
+        
             // 1. Cria endereço
             const enderecoRes = await axios.post('http://localhost:3000/enderecos/create', {
                 ...endereco,
@@ -87,15 +81,10 @@ const Restaurantes = () => {
             });
             const idEndereco = enderecoRes.data.id;
 
-            // Log do id do endereço criado
-            console.log('ID do endereço criado:', idEndereco);
-
-            // Log dos dados do restaurante
             const restauranteData = {
                 ...novoRestaurante,
                 id_endereco: idEndereco
             };
-            console.log('Enviando para /restaurantes/create:', restauranteData);
 
             // 2. Cria restaurante
             let response;
@@ -135,7 +124,6 @@ const Restaurantes = () => {
                 behavior: 'smooth'
             });
         } catch (error) {
-            console.error('Erro detalhado:', error);
             
             if (error.response?.status === 400) {
                 // Verifica se é um erro de validação de campos
@@ -214,7 +202,6 @@ const Restaurantes = () => {
             setEstadoSelecionado(cidadeData.id_estado);
         } catch (error) {
             setErro('Erro ao carregar endereço do restaurante.');
-            console.error(error);
         }
 
         window.scrollTo({

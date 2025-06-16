@@ -309,7 +309,7 @@ const PedidoDetalhe = () => {
                                     Cancelar Pedido
                                 </button>
                             )}
-                            <button onClick={() => setEditando(true)} className="btn-edit-status">
+                            <button onClick={() => setEditando(true)} className="btn-primary">
                                 Editar Status
                             </button>
                             <button onClick={handleExcluirPedido} className="btn-delete">
